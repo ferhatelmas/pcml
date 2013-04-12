@@ -10,4 +10,4 @@ inverse_deviation_of_dataset = repmat(1 ./ std(dataset, n);
 
 normalized_data = inverse_devation_of_dataset .* (dataset - mean_of_dataset);
 
-save(filename, normalized_data); 
+save(filename, 'normalized_data'); 
