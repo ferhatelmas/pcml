@@ -5,8 +5,8 @@ function normalize(dataset, filename)
 
 n = size(dataset, 1);
 
-mean_of_dataset = repmat(mean(dataset), n);
-inverse_deviation_of_dataset = repmat(1 ./ std(dataset, n));
+mean_of_dataset = repmat(mean(dataset), n, 1);
+inverse_deviation_of_dataset = repmat(1 ./ std(dataset), n, 1);
 
 normalized_data = inverse_deviation_of_dataset .* (dataset - mean_of_dataset);
 
