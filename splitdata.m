@@ -1,4 +1,4 @@
-function splitdata(dataset,name)
+function splitdata(dataset,filename)
 %SPLITDATA(dataset)
 %  Splits training dataset into two as training (2/3) and validation (1/3)
 %  and saves them into a mat file
@@ -15,6 +15,6 @@ dataset(:,val_columns) = [];
 train_data = dataset;
 
 % save validation and training datasets to file for later use
-save(strcat('val_', name,'.mat'), 'val_data');
-save(strcat('train_', name, '.mat'), 'train_data');
+save(strcat('val_', filename,'.mat'), 'val_data');
+save(strcat('train_', filename, '.mat'), 'train_data');
 
