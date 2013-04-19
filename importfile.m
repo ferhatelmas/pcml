@@ -1,7 +1,7 @@
 function importfile(fileToRead)
-%IMPORTFILE(FILETOREAD)
+%IMPORTFILE(fileToRead)
 %  Imports data from the specified mat file
-%  FILETOREAD:  file to read
+%  fileToRead:  file to read
 
 % Import the file
 newData1 = load('-mat', fileToRead);
