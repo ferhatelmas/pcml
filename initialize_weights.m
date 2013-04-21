@@ -1,5 +1,5 @@
-function matrix = initialize(m, n)
-%INITIALIZE(m, n)
+function matrix = initialize_weights(m, n)
+%INITIALIZE_WEIGHTS(m, n)
 % initializes a matrix with given size
 % to make gradient descent faster 
 % m: output size
