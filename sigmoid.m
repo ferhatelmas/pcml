@@ -4,4 +4,4 @@ function y = sigmoid(x)
 % x: input (scalar or vector)
 % y: output (scalar or vector)
 
-y = 1.0./(1.0+exp(1).^(-x));
+y = 1.0./(1.0+exp(-x));
