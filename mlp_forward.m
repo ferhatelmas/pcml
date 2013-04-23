@@ -13,7 +13,7 @@ a_r_1 = w_r_1 * x_r + b_r_1;
 % first level non-linear transforms
 z_l_1 = g_1(a_l_1);
 z_r_1 = g_1(a_r_1);
-z_lr_1 = [z_l_1 z_r_1];
+z_lr_1 = [z_l_1; z_r_1];
 
 % second level activation values
 a_l_2 = w_l_2 * z_l_1 + b_l_2;
