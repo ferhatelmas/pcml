@@ -28,8 +28,8 @@ t_t = 0.5*(t+1);
 % transfer function derivatives
 g_1_d_l = 4*sigmoid(2*a_l_1).*(1-2*sigmoid(2*a_l_1));
 g_1_d_r = 4*sigmoid(2*a_r_1).*(1-2*sigmoid(2*a_r_1));
-g_2_d_l = a_lr_2.*sigmoid(a_r_2).*sigmoid(a_l_2).*(1-sigmoid(a_l_2));
-g_2_d_r = a_lr_2.*sigmoid(a_l_2).*sigmoid(a_r_2).*(1-sigmoid(a_r_2));
+g_2_d_l = a_lr_2.*sigmoid(a_r_2).*sigmoid(a_l_2).*(sigmoid1(a_l_2));
+g_2_d_r = a_lr_2.*sigmoid(a_l_2).*sigmoid(a_r_2).*(sigmoid1(a_r_2));
 g_2_d_lr = sigmoid(a_l_2).*sigmoid(a_r_2);
 
 % residual calculations
