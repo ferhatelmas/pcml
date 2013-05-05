@@ -1,4 +1,4 @@
-function [a_l_1, a_r_1, z_l_1, z_r_1, a_l_2, a_r_2, a_lr_2, z_2, a_3] = mlp_forward(x_l, x_r, w_l_1, b_l_1, w_r_1, b_r_1, w_l_2, b_l_2, w_r_2, b_r_2, w_lr_2, b_lr_2, w_3, b_3)
+function results = mlp_forward(x_l, x_r, w_l_1, b_l_1, w_r_1, b_r_1, w_l_2, b_l_2, w_r_2, b_r_2, w_lr_2, b_lr_2, w_3, b_3)
 %MLP_FORWARD 
 % Implements forward pass of MLP
 %  x_l, x_r: left and right input vectors
@@ -25,3 +25,9 @@ z_2 = g_2(a_l_2, a_r_2, a_lr_2);
 
 % third level activation value
 a_3 = w_3 * z_2 + b_3;
+
+% make a structure to return all calculations
+results = struct('a_l_1', a_l_1, 'a_r_1', a_r_1, 'z_l_1', z_l_1, 'z_r_1', z_r_1, ...
+    'a_l_2', a_l_2, 'a_r_2', a_r_2, 'a_lr_2', a_lr_2, 'z_2', z_2, 'a_3', a_3)
+
+end
