@@ -5,4 +5,4 @@ function matrix = initialize_weights(m, n)
 % m: output size
 % n: input size
     
-matrix = normrnd(0, sqrt(1/(1+n)), m, n);
+matrix = normrnd(0, sqrt(1/n), m, n);

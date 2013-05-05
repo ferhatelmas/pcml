@@ -33,7 +33,3 @@ end
 xlim([0 tn+1]);
 ylim([0 100]); % upper-limit is random and can be changed later
 hold on
-
-
-    
-    
