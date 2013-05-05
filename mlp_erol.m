@@ -47,7 +47,7 @@ hb_3 = b_3;
 % the following goes inside a while loop that checks the validation error
 % and stops the update when it starts increasing
 
-%% while(validation error is not increasing)
+%% do while(validation error is not increasing)
 
 % do forward pass (assumes old MLP_forward, i.e. not using a struct output)
 [a_l_1, a_r_1, z_l_1, z_r_1, a_l_2, a_r_2, a_lr_2, z_2, a_3] = mlp_forward(X_L, X_R, ...

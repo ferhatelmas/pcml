@@ -6,14 +6,6 @@ function plotter(tr_err, val_err, tn)
 % tn: trial number
 % n: number of instances used for training and validation
 
-% number of instances used in an epoch for training and validation datasets
-n_tr = length(tr_err);
-n_val = length(val_err);
-
-% calculate total error by averaging over error for each instance in epoch 
-tr_err = sum(tr_err)/n_tr;
-val_err = sum(val_err)/n_val;
-
 if(tn == 1) % initialize graph object in first trial
     figure(1);
     plot(tn,tr_err,'ob');
