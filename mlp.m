@@ -143,17 +143,17 @@ end
 
     function reset_gradient_sums 
         % gradient sums 
-        sdw_l_1 = zeros(w_l_1)
-        sdw_r_1 = zeros(w_r_1)
-        sdw_l_2 = zeros(w_l_2)
-        sdw_r_2 = zeros(w_r_2)
-        sdw_lr_2 = zeros(w_lr_2)
-        sdw_3 = zeros(w_3)
-        sr_l_1 = zeros(b_l_1)
-        sr_r_1 = zeros(b_r_1)
-        sr_l_2 = zeros(b_l_2)
-        sr_r_2 = zeros(b_r_2)
-        sr_lr_2 = zeros(b_lr_2)
-        sr_3 = zeros(b_3)
+        sdw_l_1 = zeros(size(w_l_1))
+        sdw_r_1 = zeros(size(w_r_1))
+        sdw_l_2 = zeros(size(w_l_2))
+        sdw_r_2 = zeros(size(w_r_2))
+        sdw_lr_2 = zeros(size(w_lr_2))
+        sdw_3 = zeros(size(w_3))
+        sr_l_1 = zeros(size(b_l_1))
+        sr_r_1 = zeros(size(b_r_1))
+        sr_l_2 = zeros(size(b_l_2))
+        sr_r_2 = zeros(size(b_r_2))
+        sr_lr_2 = zeros(size(b_lr_2))
+        sr_3 = zeros(size(b_3))
     end 
 end
