@@ -1,7 +1,7 @@
 function y = sigmoid(x)
 %SIGMOID(x)
 % sigmoid function
-% x: input (scalar or vector)
-% y: output (scalar or vector)
+% x: input (scalar, vector or matrix)
+% y: output (scalar, vector of matrix)
 
-y = 1.0/(1.0+exp(-x));
+y = 1.0./(1.0+exp(-x));

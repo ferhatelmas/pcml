@@ -1,4 +1,4 @@
-function [w_l_1, w_r_1, b_l_1, b_r_1, w_l_2, w_r_2, w_lr_2, b_l_2, b_r_2, w_3, b_3] = mlp_erol(X_L, X_R, T, h1, h2, nu, mu)
+function [w_l_1, w_r_1, b_l_1, b_r_1, w_l_2, w_r_2, w_lr_2, b_l_2, b_r_2, w_3, b_3] = mlp_batch(X_L, X_R, T, h1, h2, nu, mu)
 %MLP(X_L, X_R, T, h1, h2, nu, mu)
 % X_L: Left input matrix
 % X_R: Right input matrix
