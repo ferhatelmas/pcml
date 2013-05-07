@@ -68,9 +68,9 @@ dw_r_1 = r_r_1*x_r';
 
 % B = reshape(sum(reshape(A',x*y,[]),2),y,[])';
 dw_3 = reshape(sum(reshape(dw_3',h2*1,[]),2),1,[])';
-dw_l_2 = reshape(sum(reshape(A',h2*h1,[]),2),h1,[])';
-dw_r_2 = reshape(sum(reshape(A',h2*h1,[]),2),h1,[])';
-dw_lr_2 = reshape(sum(reshape(A',h2*h1,[]),2),h1,[])';
-dw_l_1 = reshape(sum(reshape(A',h1*d,[]),2),d,[])';
-dw_r_1 = reshape(sum(reshape(A',h1*d,[]),2),d,[])';
+dw_l_2 = reshape(sum(reshape(dw_l_2',h2*h1,[]),2),h1,[])';
+dw_r_2 = reshape(sum(reshape(dw_r_2',h2*h1,[]),2),h1,[])';
+dw_lr_2 = reshape(sum(reshape(dw_lr_2',h2*h1,[]),2),h1,[])';
+dw_l_1 = reshape(sum(reshape(dw_l_1',h1*d,[]),2),d,[])';
+dw_r_1 = reshape(sum(reshape(dw_r_1',h1*d,[]),2),d,[])';
 
