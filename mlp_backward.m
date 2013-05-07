@@ -21,11 +21,11 @@ function [dw_l_1, dw_r_1, dw_l_2, dw_r_2, dw_lr_2, dw_3, r_l_1, r_r_1, r_l_2, r_
 
 % dimensions
 n = size(a_3,2);
-h2 = size(a_3,1);
-h1 = size(a_l_1,1)/n;
-d = length(x_l);
+h2 = size(a_l_2,1);
+h1 = size(a_l_1,1);
+d = size(x_l,1);
 
-% build z_lr vector from z_l_1 and z_r_1
+% build z_lr from z_l_1 and z_r_1
 z_lr_1 = [z_l_1 ; z_r_1];
 
 % linear transformation of t from [-1,1] to [0,1]
@@ -34,12 +34,12 @@ t_t = 0.5*(t+1);
 % transfer function derivatives
 g_1_d_l = 4*sigmoid(2*a_l_1).*(1-2*sigmoid(2*a_l_1));
 g_1_d_r = 4*sigmoid(2*a_r_1).*(1-2*sigmoid(2*a_r_1));
-g_2_d_l = a_lr_2.*sigmoid(a_r_2).*sigmoid(a_l_2).*(sigmoid_der(a_l_2));
-g_2_d_r = a_lr_2.*sigmoid(a_l_2).*sigmoid(a_r_2).*(sigmoid_der(a_r_2));
+g_2_d_l = a_lr_2.*sigmoid(a_r_2).*sigmoid(a_l_2).*sigmoid_der(a_l_2);
+g_2_d_r = a_lr_2.*sigmoid(a_l_2).*sigmoid(a_r_2).*sigmoid_der(a_r_2);
 g_2_d_lr = sigmoid(a_l_2).*sigmoid(a_r_2);
 
 % diagonalization of derivatives for all instances
-diag_l_2 = repmat(eye(size(g_2_d_l, 2)), size(g_2_d_l, 1), 1);
+diag_l_2 = repmat(eye(h2), n, 1);
 diag_l_2(diag_l_2) = g_2_d_l;
 diag_r_2 = repmat(eye(size(g_2_d_r, 2)), size(g_2_d_r, 1), 1);
 diag_r_2(diag_r_2) = g_2_d_r;

@@ -115,6 +115,7 @@ tr_err = logerr(T,a_3);
   w_l_2, b_l_2, w_r_2, b_r_2, w_lr_2, b_lr_2, ...
   w_3, b_3);
 
+val_err_prev = val_err;
 val_err = logerr(T_v,a_3);
 
 % visualize errors
