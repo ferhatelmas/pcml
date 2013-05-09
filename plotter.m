@@ -24,5 +24,5 @@ else
 end
 
 xlim([0 tn+1]);
-ylim([0.65 0.75]); % upper-limit is random and can be changed later
+ylim([0.5 1.2]); % upper-limit is random and can be changed later
 hold on

@@ -4,6 +4,6 @@ function matrix = initialize_weights(m, n)
 % to make gradient descent faster 
 % m: output size
 % n: input size
-    
-% matrix = normrnd(0, sqrt(1/n), m, n);
-matrix = 0.001*ones(m, n);
+
+matrix = normrnd(0, sqrt(1/n), m, n);
+% matrix = 0.001*ones(m, n);

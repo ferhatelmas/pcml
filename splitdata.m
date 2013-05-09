@@ -14,7 +14,7 @@ val_data = dataset(:,val_columns);
 dataset(:,val_columns) = [];
 train_data = dataset;
 
-n = size(dataset, 1);
+n = size(train_data, 1);
 
 % calculate mean and std_deviation of dataset
 mean_of_dataset = repmat(mean(train_data), n, 1);

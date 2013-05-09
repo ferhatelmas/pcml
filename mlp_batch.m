@@ -12,6 +12,8 @@ function [hw_l_1, hw_r_1, hb_l_1, hb_r_1, hw_l_2, hw_r_2, hw_lr_2, hb_l_2, hb_r_
 % mu: Momentum term
 % batch_size: Number of input to be processed in one batch
 
+format long
+
 % dimensions of input vectors
 % d - dimension of the input space
 % n - number of the inputs
@@ -53,7 +55,6 @@ val_err_prev = 1e6;
 
 while(val_err - val_err_prev <= 0)  % difference is positive if val_err is increasing
 
-    disp(tn)
     % process one batch of the inputs
     for i=1:batch_size:n
         % upper index to slice input matrices
@@ -67,7 +68,7 @@ while(val_err - val_err_prev <= 0)  % difference is positive if val_err is incre
         [a_l_1, a_r_1, ...
          z_l_1, z_r_1, ...
          a_l_2, a_r_2, a_lr_2, ...
-         z_2, a_3] = mlp_forward(x_l, x_l, ...
+         z_2, a_3] = mlp_forward(x_l, x_r, ...
                                  w_l_1, b_l_1, w_r_1, b_r_1, ...
                                  w_l_2, b_l_2, w_r_2, b_r_2, w_lr_2, b_lr_2, ...
                                  w_3, b_3);
@@ -133,7 +134,7 @@ while(val_err - val_err_prev <= 0)  % difference is positive if val_err is incre
                                             w_3, b_3);
 
 % calculate training error
-tr_err = logerr(T,a_3);
+tr_err = logerr(T,a_3)
 
 % do a forward pass to get updated class labels
 [~, ~, ~, ~, ~, ~, ~, ~, a_3] = mlp_forward(X_L_val, X_R_val, ...
@@ -142,13 +143,10 @@ tr_err = logerr(T,a_3);
                                             w_3, b_3);
 % update validation error
 val_err_prev = val_err;
-val_err = logerr(T_val,a_3);
-disp(tr_err)
-disp(val_err)
-disp(val_err_prev)
+val_err = logerr(T_val,a_3)
 
 % visualize errors
-tn = tn + 1;
+tn = tn + 1
 plotter(tr_err, val_err, tn);
 
 end
