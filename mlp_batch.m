@@ -1,4 +1,4 @@
-function [w_l_1, w_r_1, b_l_1, b_r_1, w_l_2, w_r_2, w_lr_2, b_l_2, b_r_2, w_3, b_3] = mlp_batch(X_L, X_R, T, X_L_val, X_R_val, T_val, h1, h2, nu, mu, batch_size)
+function [hw_l_1, hw_r_1, hb_l_1, hb_r_1, hw_l_2, hw_r_2, hw_lr_2, hb_l_2, hb_r_2, hw_3, hb_3] = mlp_batch(X_L, X_R, T, X_L_val, X_R_val, T_val, h1, h2, nu, mu, batch_size)
 %MLP_BATCH(X_L, X_R, T, X_L_val, X_R_val, T_val, h1, h2, nu, mu, batch_size)
 % X_L: Left input matrix
 % X_R: Right input matrix
@@ -47,15 +47,15 @@ hb_3 = b_3;
 % the following goes inside a while loop that checks the validation error
 % and stops the update when it starts increasing
 
-val_err = 0; % current validation error
-val_err_prev = 0; % previous validation error
 tn = 0; % epoch count
+val_err = 1e6;
+val_err_prev = 1e6;
 
 while(val_err - val_err_prev <= 0)  % difference is positive if val_err is increasing
 
+    disp(tn)
     % process one batch of the inputs
     for i=1:batch_size:n
-
         % upper index to slice input matrices
         j = i + batch_size - 1;
         % one batch from corresponding inputs 
@@ -99,6 +99,7 @@ while(val_err - val_err_prev <= 0)  % difference is positive if val_err is incre
 
         temp = gradient_descent(hw_r_2, w_r_2, dw_r_2, nu, mu);
         hw_r_2 = w_r_2; w_r_2 = temp;
+        
         temp = gradient_descent(hw_lr_2, w_lr_2, dw_lr_2, nu, mu);
         hw_lr_2 = w_lr_2; w_lr_2 = temp;
 
@@ -142,6 +143,9 @@ tr_err = logerr(T,a_3);
 % update validation error
 val_err_prev = val_err;
 val_err = logerr(T_val,a_3);
+disp(tr_err)
+disp(val_err)
+disp(val_err_prev)
 
 % visualize errors
 tn = tn + 1;

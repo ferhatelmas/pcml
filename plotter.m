@@ -7,21 +7,22 @@ function plotter(tr_err, val_err, tn)
 % n: number of instances used for training and validation
 
 if(tn == 1) % initialize graph object in first trial
+    close all
     figure(1);
-    plot(tn,tr_err,'ob');
+    plot(tn,tr_err,'*b');
     hold on
-    plot(tn,val_err,'og');
+    plot(tn,val_err,'*g');
     legend('Training','Validation');
     title('Training and Validation Errors for MLP Training');
     xlabel('Trial #');
     ylabel('Logistic Error');
 else    
     figure(1);
-    plot(tn,tr_err,'ob');
+    plot(tn,tr_err,'*b');
     hold on
-    plot(tn,val_err,'og');
+    plot(tn,val_err,'*g');
 end
 
 xlim([0 tn+1]);
-ylim([0 100]); % upper-limit is random and can be changed later
+ylim([0.65 0.75]); % upper-limit is random and can be changed later
 hold on
