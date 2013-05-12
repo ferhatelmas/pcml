@@ -24,6 +24,6 @@ inverse_deviation_of_dataset = repmat(1 ./ std(train_data), n, 1);
 train_data = inverse_deviation_of_dataset .* (train_data - mean_of_dataset);
 
 % save validation and training datasets to file for later use
-save(strcat('val_', filename,'.mat'), 'val_data');
-save(strcat('train_', filename, '.mat'), 'train_data');
+save(strcat('../data/val_', filename,'.mat'), 'val_data');
+save(strcat('../data/train_', filename, '.mat'), 'train_data');
 

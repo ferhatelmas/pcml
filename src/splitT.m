@@ -15,6 +15,6 @@ T(:,val_columns) = [];
 t_train = T;
 
 % save validation and training datasets to file for later use
-save(strcat('val_', filename,'.mat'), 't_val');
-save(strcat('train_', filename, '.mat'), 't_train');
+save(strcat('../data/val_', filename,'.mat'), 't_val');
+save(strcat('../data/train_', filename, '.mat'), 't_train');
 
