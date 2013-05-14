@@ -32,10 +32,10 @@ z_lr_1 = [z_l_1 ; z_r_1];
 t_t = 0.5*(t+1);
 
 % transfer function derivatives
-g_1_d_l = 2*sigmoid(2*a_l_1).*(1-sigmoid(2*a_l_1));
-g_1_d_r = 2*sigmoid(2*a_r_1).*(1-sigmoid(2*a_r_1));
-g_2_d_l = a_lr_2.*sigmoid(a_r_2).*sigmoid(a_l_2).*sigmoid_der(a_l_2);
-g_2_d_r = a_lr_2.*sigmoid(a_l_2).*sigmoid(a_r_2).*sigmoid_der(a_r_2);
+g_1_d_l = 2*sigmoid(2*a_l_1).*(2.0./(1+exp(2*a_l_1)));
+g_1_d_r = 2*sigmoid(2*a_r_1).*(2.0./(1+exp(2*a_r_1)));
+g_2_d_l = a_lr_2.*sigmoid(a_r_2).*sigmoid_der(a_l_2);
+g_2_d_r = a_lr_2.*sigmoid(a_l_2).*sigmoid_der(a_r_2);
 g_2_d_lr = sigmoid(a_l_2).*sigmoid(a_r_2);
 
 % diagonalization of derivatives for all instances
