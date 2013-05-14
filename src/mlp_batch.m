@@ -55,6 +55,12 @@ val_err_prev = 1e6;
 
 while(val_err - val_err_prev <= 0)  % difference is positive if val_err is increasing
 
+    % randomize columns of training data to change ordering
+    randp = randperm(n);
+    X_L = X_L(:,randp);
+    X_R = X_R(:,randp);
+    T = T(randp);
+    
     % process one batch of the inputs
     for i=1:batch_size:n
         % upper index to slice input matrices
@@ -125,6 +131,8 @@ while(val_err - val_err_prev <= 0)  % difference is positive if val_err is incre
 
         temp = gradient_descent(hb_3, b_3, r_3, nu, mu);
         hb_3 = b_3; b_3 = temp;
+        
+        error = logerr(t,a_3);
     end
 
 % do one more forward pass to get labels for these epoch
@@ -142,11 +150,11 @@ tr_err = logerr(T,a_3)
                                             w_l_2, b_l_2, w_r_2, b_r_2, w_lr_2, b_lr_2, ...
                                             w_3, b_3);
 % update validation error
-val_err_prev = val_err;
-val_err = logerr(T_val,a_3)
+% val_err_prev = val_err;
+val_err = logerr(T_val,a_3);
 
 % visualize errors
 tn = tn + 1
-plotter(tr_err, val_err, tn);
+% plotter(tr_err, val_err, tn);
 
 end
