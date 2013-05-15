@@ -32,23 +32,11 @@ z_lr_1 = [z_l_1 ; z_r_1];
 t_t = 0.5*(t+1);
 
 % transfer function derivatives
-g_1_d_l = 2*sigmoid(2*a_l_1).*(2.0./(1+exp(2*a_l_1)));
-g_1_d_r = 2*sigmoid(2*a_r_1).*(2.0./(1+exp(2*a_r_1)));
+g_1_d_l = sigmoid(2*a_l_1).*(2.0./(1+exp(2*a_l_1)));
+g_1_d_r = sigmoid(2*a_r_1).*(2.0./(1+exp(2*a_r_1)));
 g_2_d_l = a_lr_2.*sigmoid(a_r_2).*sigmoid_der(a_l_2);
 g_2_d_r = a_lr_2.*sigmoid(a_l_2).*sigmoid_der(a_r_2);
 g_2_d_lr = sigmoid(a_l_2).*sigmoid(a_r_2);
-
-% diagonalization of derivatives for all instances
-% diag_l_2 = repmat(eye(h2), n, 1);
-% diag_l_2(find(diag_l_2)) = g_2_d_l;
-% diag_r_2 = repmat(eye(h2), n, 1);
-% diag_r_2(find(diag_r_2)) = g_2_d_r;
-% diag_lr_2 = repmat(eye(h2), n, 1);
-% diag_lr_2(find(diag_lr_2)) = g_2_d_lr;
-% diag_l_1 = repmat(eye(h1), n, 1);
-% diag_l_1(find(diag_l_1)) = g_1_d_l;
-% diag_r_1 = repmat(eye(h1), n, 1);
-% diag_r_1(find(diag_r_1)) = g_1_d_r;
 
 r_3 = sigmoid(a_3) - t_t;
 r_l_2 = diag(g_2_d_l)*w_3'*r_3;
@@ -57,15 +45,6 @@ r_lr_2 = diag(g_2_d_lr)*w_3'*r_3;
 r_l_1 = diag(g_1_d_l)*(w_l_2'*r_l_2 + (w_lr_2(:,1:h1))'*r_lr_2);
 r_r_1 = diag(g_1_d_r)*(w_r_2'*r_r_2 + (w_lr_2(:,h1+1:end))'*r_lr_2);
 
-% residual calculations
-% r_3 = sigmoid(a_3) - t_t;
-% r_l_2 = diag_l_2 * w_3' * r_3;
-% r_r_2 = diag_r_2 * w_3' * r_3;
-% r_lr_2 = diag_lr_2 * w_3' * r_3;
-% size(r_l_2)
-% r_l_1 = diag_l_1 * (w_l_2' * r_l_2 + (w_lr_2(:, 1:h1))' * r_lr_2);
-% r_r_1 = diag_r_1 * (w_r_2' * r_r_2 + (w_lr_2(:, h1+1:end))' * r_lr_2);
-
 % gradient calculations and summation over all instances of batch
 dw_3 = r_3 * z_2';
 dw_l_2 = r_l_2 * z_l_1';
@@ -73,11 +52,3 @@ dw_r_2 = r_r_2 * z_r_1';
 dw_lr_2 = r_lr_2 * z_lr_1';
 dw_l_1 = r_l_1 * x_l';
 dw_r_1 = r_r_1 * x_r';
-
-% B = reshape(sum(reshape(A',x*y,[]),2),y,[])';
-% dw_3 = reshape(sum(reshape(dw_3', h2*1, []), 2), h2, [])';
-% dw_l_2 = reshape(sum(reshape(dw_l_2', h2*h1, []), 2), h1,[])';
-% dw_r_2 = reshape(sum(reshape(dw_r_2', h2*h1, []), 2), h1,[])';
-% dw_lr_2 = reshape(sum(reshape(dw_lr_2', h2*2*h1, []), 2), 2*h1,[])';
-% dw_l_1 = reshape(sum(reshape(dw_l_1', h1*d, []), 2), d,[])';
-% dw_r_1 = reshape(sum(reshape(dw_r_1', h1*d, []), 2), d,[])';

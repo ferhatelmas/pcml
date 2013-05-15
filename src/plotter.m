@@ -1,28 +1,32 @@
-function plotter(tr_err, val_err, tn)
+function plotter(tr_err, val_err, zerone_err, ec)
 %PLOTTER(TR_ERR, VAL_ERR)
 % plots training and validation errors on the same figure
 % tr_err: vector of training errors for an epoch
 % val_err: vector of validation errors for an epoch
-% tn: trial number
+% tn: epoch number
 % n: number of instances used for training and validation
 
-if(tn == 1) % initialize graph object in first trial
+if(ec == 1) % initialize graph object in first trial
     close all
     figure(1);
-    plot(tn,tr_err,'*b');
+    plot(ec,tr_err,'*r');
     hold on
-    plot(tn,val_err,'*g');
-    legend('Training','Validation');
-    title('Training and Validation Errors for MLP Training');
-    xlabel('Trial #');
-    ylabel('Logistic Error');
+    plot(ec,val_err,'*g');
+    hold on
+    plot(ec,zerone_err,'*k');
+    legend('Training','Validation','0-1');
+    title('Training, Validation and Zero-One Errors for MLP Training');
+    xlabel('Epoch #');
+    ylabel('Error Value');
 else    
     figure(1);
-    plot(tn,tr_err,'*b');
+    plot(ec,tr_err,'*r');
     hold on
-    plot(tn,val_err,'*g');
+    plot(ec,val_err,'*g');
+    hold on
+    plot(ec,zerone_err,'*k');
 end
 
-xlim([0 tn+1]);
-ylim([0 1.0]); % upper-limit is random and can be changed later
+xlim([0 ec+1]);
+ylim([0 1.5]); % upper-limit is random and can be changed later
 hold on

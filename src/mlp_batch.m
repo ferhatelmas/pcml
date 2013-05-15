@@ -46,21 +46,19 @@ hb_l_1 = b_l_1; hb_r_1 = b_r_1;
 hb_l_2 = b_l_2; hb_r_2 = b_r_2; hb_lr_2 = b_lr_2;
 hb_3 = b_3;
 
-% the following goes inside a while loop that checks the validation error
-% and stops the update when it starts increasing
 
-a_3_v = ones(1,n);
-tn = 0; % epoch count
+
+% randomize columns of training data to change ordering
+randp = randperm(n);
+X_L = X_L(:,randp);
+X_R = X_R(:,randp);
+T = T(randp);
+
+ec = 0; % epoch count
 val_err = 1e6;
 val_err_prev = 1e6;
 
 while(val_err - val_err_prev <= 0)  % difference is positive if val_err is increasing
-
-    % randomize columns of training data to change ordering
-    randp = randperm(n);
-    X_L = X_L(:,randp);
-    X_R = X_R(:,randp);
-    T = T(randp);
     
     % process one batch of the inputs
     for i=1:batch_size:n
@@ -154,8 +152,11 @@ tr_err = logerr(T,a_3)
 % val_err_prev = val_err;
 val_err = logerr(T_val,a_3);
 
+% calculate 0-1 error for validation set
+zerone_err = sum(T_val.*a_3 < 0)/length(T_val);
+
 % visualize errors
-tn = tn + 1;
-plotter(tr_err, val_err, tn);
+ec = ec + 1;
+plotter(tr_err, val_err, zerone_err, ec);
 
 end
