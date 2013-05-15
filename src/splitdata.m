@@ -14,11 +14,13 @@ val_data = dataset(:,val_columns);
 dataset(:,val_columns) = [];
 train_data = dataset;
 
-n = size(train_data, 1);
+n = size(train_data, 2);
 
 % calculate mean and std_deviation of dataset
-mean_of_dataset = repmat(mean(train_data), n, 1);
-inverse_deviation_of_dataset = repmat(1 ./ std(train_data), n, 1);
+mean_of_dataset = repmat(mean(train_data,2), 1, n);
+temp = (train_data - mean_of_dataset).^2;
+deviation = sqrt(sum(temp,2)./n);
+inverse_deviation_of_dataset = repmat(1./deviation, 1, n);
 
 % standardize by substracting mean and dividing by standard deviation
 train_data = inverse_deviation_of_dataset .* (train_data - mean_of_dataset);

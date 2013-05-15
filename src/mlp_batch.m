@@ -49,6 +49,7 @@ hb_3 = b_3;
 % the following goes inside a while loop that checks the validation error
 % and stops the update when it starts increasing
 
+a_3_v = ones(1,n);
 tn = 0; % epoch count
 val_err = 1e6;
 val_err_prev = 1e6;
@@ -132,7 +133,7 @@ while(val_err - val_err_prev <= 0)  % difference is positive if val_err is incre
         temp = gradient_descent(hb_3, b_3, r_3, nu, mu);
         hb_3 = b_3; b_3 = temp;
         
-        error = logerr(t,a_3);
+        % error = logerr(t,a_3);s
     end
 
 % do one more forward pass to get labels for these epoch
@@ -154,7 +155,7 @@ tr_err = logerr(T,a_3)
 val_err = logerr(T_val,a_3);
 
 % visualize errors
-tn = tn + 1
-% plotter(tr_err, val_err, tn);
+tn = tn + 1;
+plotter(tr_err, val_err, tn);
 
 end
