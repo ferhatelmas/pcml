@@ -46,8 +46,6 @@ hb_l_1 = b_l_1; hb_r_1 = b_r_1;
 hb_l_2 = b_l_2; hb_r_2 = b_r_2; hb_lr_2 = b_lr_2;
 hb_3 = b_3;
 
-
-
 % randomize columns of training data to change ordering
 randp = randperm(n);
 X_L = X_L(:,randp);
@@ -131,7 +129,6 @@ while(val_err - val_err_prev <= 0)  % difference is positive if val_err is incre
         temp = gradient_descent(hb_3, b_3, r_3, nu, mu);
         hb_3 = b_3; b_3 = temp;
         
-        % error = logerr(t,a_3);s
     end
 
 % do one more forward pass to get labels for these epoch
@@ -143,6 +140,9 @@ while(val_err - val_err_prev <= 0)  % difference is positive if val_err is incre
 % calculate training error
 tr_err = logerr(T,a_3)
 
+% calculate 0-1 error for validation set
+zerone_err = sum(T.*a_3 < 0)/length(T);
+
 % do a forward pass to get updated class labels
 [~, ~, ~, ~, ~, ~, ~, ~, a_3] = mlp_forward(X_L_val, X_R_val, ...
                                             w_l_1, b_l_1, w_r_1, b_r_1, ...
@@ -152,8 +152,7 @@ tr_err = logerr(T,a_3)
 % val_err_prev = val_err;
 val_err = logerr(T_val,a_3);
 
-% calculate 0-1 error for validation set
-zerone_err = sum(T_val.*a_3 < 0)/length(T_val);
+
 
 % visualize errors
 ec = ec + 1;

@@ -32,13 +32,13 @@ z_lr_1 = [z_l_1 ; z_r_1];
 t_t = 0.5*(t+1);
 
 % transfer function derivatives
-g_1_d_l = sigmoid(2*a_l_1).*(2.0./(1+exp(2*a_l_1)));
-g_1_d_r = sigmoid(2*a_r_1).*(2.0./(1+exp(2*a_r_1)));
+g_1_d_l = sigmoid(2*a_l_1).*(4.0./(1+exp(2*a_l_1)));
+g_1_d_r = sigmoid(2*a_r_1).*(4.0./(1+exp(2*a_r_1)));
 g_2_d_l = a_lr_2.*sigmoid(a_r_2).*sigmoid_der(a_l_2);
 g_2_d_r = a_lr_2.*sigmoid(a_l_2).*sigmoid_der(a_r_2);
 g_2_d_lr = sigmoid(a_l_2).*sigmoid(a_r_2);
 
-r_3 = sigmoid(a_3) - t_t;
+r_3 = -t.*(1-sigmoid(t.*a_3));
 r_l_2 = diag(g_2_d_l)*w_3'*r_3;
 r_r_2 = diag(g_2_d_r)*w_3'*r_3;
 r_lr_2 = diag(g_2_d_lr)*w_3'*r_3;

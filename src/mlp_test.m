@@ -6,7 +6,7 @@ x = reshape(x,25,[]);
 
 h1 = 3; % first layer
 h2 = 2; % second layer
-t = 1;
+t = -1;
 
 % layer 1 - weight initializations
 w_l_1 = initialize_weights(h1, d);
@@ -54,7 +54,7 @@ b_3 = initialize_weights(1, 1);
 e2 = logerr(t,a_3);
 
 
-w_l_2(1,1) = w_l_2(1,1) + 1e-6;
+w_lr_2(2,3) = w_lr_2(2,3) + 1e-6;
 
 % do a forward pass
         [a_l_1, a_r_1, ...
@@ -82,4 +82,4 @@ w_l_2(1,1) = w_l_2(1,1) + 1e-6;
  e1 = logerr(t,a_3);
  
  der = (e1-e2)/1e-6
- disp(dw_l_2)
+ disp(dw_lr_2)
