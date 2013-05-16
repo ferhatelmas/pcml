@@ -4,4 +4,5 @@ function y = sigmoid_der(x)
 % x: input (scalar, vector or matrix)
 % y: output (scalar, vector of matrix)
 
-y = sigmoid(x)./(1.0+exp(x));
+
+y = sigmoid(x) ./ (1.0+exp(x));
