@@ -28,22 +28,20 @@ d = size(x_l, 1);
 % build z_lr from z_l_1 and z_r_1
 z_lr_1 = [z_l_1 ; z_r_1];
 
-% linear transformation of t from [-1,1] to [0,1]
-t_t = 0.5*(t+1);
-
 % transfer function derivatives
-g_1_d_l = 4.0*sigmoid(2*a_l_1)./(1+exp(2*a_l_1));
-g_1_d_r = 4.0*sigmoid(2*a_r_1)./(1+exp(2*a_r_1));
-g_2_d_l = a_lr_2.*sigmoid(a_r_2).*sigmoid_der(a_l_2);
-g_2_d_r = a_lr_2.*sigmoid(a_l_2).*sigmoid_der(a_r_2);
-g_2_d_lr = sigmoid(a_l_2).*sigmoid(a_r_2);
+g_1_d_l = 1 - z_l_1 .^ 2; % 4 * sigmoid(2 * a_l_1) .* sigmoid(-2 * a_l_1);
+g_1_d_r = 1 - z_r_1 .^ 2; % 4 * sigmoid(2 * a_r_1) .* sigmoid(-2 * a_r_1);
+g_2_d_l = z_2 .* sigmoid(-a_l_2);
+g_2_d_r = z_2 .* sigmoid(-a_r_2);
+g_2_d_lr = sigmoid(a_l_2) .* sigmoid(a_r_2);
 
-r_3 = sigmoid(a_3) - t_t;
-r_l_2 = diag(g_2_d_l)*w_3'*r_3;
-r_r_2 = diag(g_2_d_r)*w_3'*r_3;
-r_lr_2 = diag(g_2_d_lr)*w_3'*r_3;
-r_l_1 = diag(g_1_d_l)*(w_l_2'*r_l_2 + (w_lr_2(:,1:h1))'*r_lr_2);
-r_r_1 = diag(g_1_d_r)*(w_r_2'*r_r_2 + (w_lr_2(:,h1+1:end))'*r_lr_2);
+% residual calculations
+r_3 = -t .* sigmoid(-t * a_3);
+r_l_2 = diag(g_2_d_l) * w_3' * r_3;
+r_r_2 = diag(g_2_d_r) * w_3' * r_3;
+r_lr_2 = diag(g_2_d_lr) * w_3' * r_3;
+r_l_1 = diag(g_1_d_l) * (w_l_2' * r_l_2 + (w_lr_2(:,1:h1))' * r_lr_2);
+r_r_1 = diag(g_1_d_r) * (w_r_2' * r_r_2 + (w_lr_2(:,h1+1:end))' * r_lr_2);
 
 % gradient calculations and summation over all instances of batch
 dw_3 = r_3 * z_2';
