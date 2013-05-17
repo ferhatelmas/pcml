@@ -4,4 +4,4 @@ function y = g_1(x)
 % x: input (scalar, vector or matrix)
 % y: output (scalar, vector or matrix)
 
-y = 2*sigmoid(2.*x)-1;
+y = 2.*sigmoid(2.*x)-1;

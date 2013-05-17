@@ -12,8 +12,6 @@ function [hw_l_1, hw_r_1, hb_l_1, hb_r_1, hw_l_2, hw_r_2, hw_lr_2, hb_l_2, hb_r_
 % mu: Momentum term
 % batch_size: Number of input to be processed in one batch
 
-format long
-
 % dimensions of input vectors
 % d - dimension of the input space
 % n - number of the inputs
@@ -140,7 +138,7 @@ while(val_err - val_err_prev <= 0)  % difference is positive if val_err is incre
 % calculate training error
 tr_err = logerr(T,a_3)
 
-% calculate 0-1 error for validation set
+% calculate 0-1 error for training set
 zerone_err = sum(T.*a_3 < 0)/length(T);
 
 % do a forward pass to get updated class labels
@@ -151,8 +149,6 @@ zerone_err = sum(T.*a_3 < 0)/length(T);
 % update validation error
 % val_err_prev = val_err;
 val_err = logerr(T_val,a_3);
-
-
 
 % visualize errors
 ec = ec + 1;
