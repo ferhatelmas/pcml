@@ -147,8 +147,6 @@ while(max_val - mean_val < threshold)  % difference is positive if val_err is in
 % calculate training error
 tr_err = [tr_err logerr(T,a_3)]
 
-% calculate 0-1 error for training set
-zero_one_error = [zero_one_error mean(T.*a_3 < 0)]
 
 % do a forward pass to get updated class labels
 [~, ~, ~, ~, ~, ~, ~, ~, a_3] = mlp_forward(X_L_val, X_R_val, ...
@@ -160,6 +158,9 @@ zero_one_error = [zero_one_error mean(T.*a_3 < 0)]
 val_err = [val_err logerr(T_val,a_3)]
 max_val = max(val_err);
 mean_val = mean(val_err);
+
+% calculate 0-1 error for training set
+zero_one_error = [zero_one_error mean(T_val.*a_3 < 0)]
 
 % visualize errors
 ec = ec + 1;

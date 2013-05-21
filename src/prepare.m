@@ -26,4 +26,4 @@ X_L_test = normalize(test_left_s, m_l, istd_l);
 X_R_test = normalize(test_right_s, m_r, istd_r);
 T_test = test_cat_s - 2;
 
-clear t_train t_val test_cat_s test_left_s test_right_s train_cat_s val_data
+clear t_train t_val test_cat_s test_left_s test_right_s train_cat_s val_data m_l m_r istd_l istd_r
