@@ -23,7 +23,7 @@ test_cat_s = test_cat_s - 2;
                                             w_l_2, b_l_2, w_r_2, b_r_2, w_lr_2, b_lr_2, ...
                                             w_3, b_3);
    
-% Calculates logictic and zero error for the predicted class labels                                        
+% Calculates logistic and zero error for the predicted class labels                                        
 logistic_error = logerr(test_cat_s, a_3);
 zero_one_error = mean(T.*a_3 < 0);
 

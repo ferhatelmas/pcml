@@ -1,4 +1,4 @@
-function [hw_l_1, hw_r_1, hb_l_1, hb_r_1, hw_l_2, hw_r_2, hw_lr_2, hb_l_2, hb_r_2, hw_3, hb_3] = mlp_batch(X_L, X_R, T, X_L_val, X_R_val, T_val, h1, h2, nu, mu, batch_size)
+function [hw_l_1, hw_r_1, hb_l_1, hb_r_1, hw_l_2, hw_r_2, hw_lr_2, hb_l_2, hb_r_2, hb_lr_2, hw_3, hb_3, tr_err, val_err, zero_one_error] = mlp_batch(X_L, X_R, T, X_L_val, X_R_val, T_val, h1, h2, nu, mu, batch_size)
 %MLP_BATCH(X_L, X_R, T, X_L_val, X_R_val, T_val, h1, h2, nu, mu, batch_size)
 % X_L: Left input matrix
 % X_R: Right input matrix
@@ -53,6 +53,11 @@ T = T(randp);
 ec = 0; % epoch count
 val_err = 1e6;
 val_err_prev = 1e6;
+
+% initialize vectors to accumulate errors after each epoch
+tr_err = [];
+val_err = [];
+zero_one_error = [];
 
 while(val_err - val_err_prev <= 0)  % difference is positive if val_err is increasing
     
@@ -136,10 +141,10 @@ while(val_err - val_err_prev <= 0)  % difference is positive if val_err is incre
                                             w_3, b_3);
 
 % calculate training error
-tr_err = logerr(T,a_3)
+tr_err = [tr_err logerr(T,a_3)]
 
 % calculate 0-1 error for training set
-zero_one_error = mean(T.*a_3 < 0);
+zero_one_error = [zero_one_error mean(T.*a_3 < 0)];
 
 % do a forward pass to get updated class labels
 [~, ~, ~, ~, ~, ~, ~, ~, a_3] = mlp_forward(X_L_val, X_R_val, ...
@@ -148,7 +153,7 @@ zero_one_error = mean(T.*a_3 < 0);
                                             w_3, b_3);
 % update validation error
 % val_err_prev = val_err;
-val_err = logerr(T_val,a_3);
+val_err = [val_err logerr(T_val,a_3)];
 
 % visualize errors
 ec = ec + 1;
