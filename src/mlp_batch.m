@@ -59,7 +59,11 @@ tr_err = [];
 val_err = [];
 zero_one_error = [];
 
-while(val_err - val_err_prev <= 0)  % difference is positive if val_err is increasing
+max_val = 0;
+mean_val = 0;
+threshold = 0.3;
+
+while(max_val - mean_val < threshold)  % difference is positive if val_err is increasing
     
     % process one batch of the inputs
     for i=1:batch_size:n
@@ -153,7 +157,9 @@ zero_one_error = [zero_one_error mean(T.*a_3 < 0)];
                                             w_3, b_3);
 % update validation error
 % val_err_prev = val_err;
-val_err = [val_err logerr(T_val,a_3)];
+val_err = [val_err logerr(T_val,a_3)]
+max_val = max(val_err);
+mean_val = mean(val_err);
 
 % visualize errors
 ec = ec + 1;
