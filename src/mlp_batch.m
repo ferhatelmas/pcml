@@ -139,7 +139,7 @@ while(val_err - val_err_prev <= 0)  % difference is positive if val_err is incre
 tr_err = logerr(T,a_3)
 
 % calculate 0-1 error for training set
-zerone_err = sum(T.*a_3 < 0)/length(T);
+zero_one_error = mean(T.*a_3 < 0);
 
 % do a forward pass to get updated class labels
 [~, ~, ~, ~, ~, ~, ~, ~, a_3] = mlp_forward(X_L_val, X_R_val, ...
@@ -152,6 +152,6 @@ val_err = logerr(T_val,a_3);
 
 % visualize errors
 ec = ec + 1;
-plotter(tr_err, val_err, zerone_err, ec);
+plotter(tr_err, val_err, zero_one_error, ec);
 
 end
