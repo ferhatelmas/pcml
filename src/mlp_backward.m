@@ -36,17 +36,25 @@ g_2_d_r = z_2 .* sigmoid(-a_r_2);
 g_2_d_lr = sigmoid(a_l_2) .* sigmoid(a_r_2);
 
 % residual calculations
-r_3 = -t .* sigmoid(-t * a_3);
-r_l_2 = diag(g_2_d_l) * w_3' * r_3;
-r_r_2 = diag(g_2_d_r) * w_3' * r_3;
-r_lr_2 = diag(g_2_d_lr) * w_3' * r_3;
-r_l_1 = diag(g_1_d_l) * (w_l_2' * r_l_2 + (w_lr_2(:,1:h1))' * r_lr_2);
-r_r_1 = diag(g_1_d_r) * (w_r_2' * r_r_2 + (w_lr_2(:,h1+1:end))' * r_lr_2);
+r_3 = -t .* sigmoid(-t .* a_3);
+r_l_2 = g_2_d_l .* (w_3' * r_3);
+r_r_2 = g_2_d_r .* (w_3' * r_3);
+r_lr_2 = g_2_d_lr .* (w_3' * r_3);
+r_l_1 = g_1_d_l .* (w_l_2' * r_l_2 + (w_lr_2(:,1:h1))' * r_lr_2);
+r_r_1 = g_1_d_r .* (w_r_2' * r_r_2 + (w_lr_2(:,h1+1:end))' * r_lr_2);
 
-% gradient calculations and summation over all instances of batch
+% gradient calculations
 dw_3 = r_3 * z_2';
 dw_l_2 = r_l_2 * z_l_1';
 dw_r_2 = r_r_2 * z_r_1';
 dw_lr_2 = r_lr_2 * z_lr_1';
 dw_l_1 = r_l_1 * x_l';
 dw_r_1 = r_r_1 * x_r';
+
+% summation over all instances of batch
+r_3 = sum(r_3, 2);
+r_l_2 = sum(r_l_2, 2);
+r_r_2 = sum(r_r_2, 2);
+r_lr_2 = sum(r_lr_2, 2);
+r_l_1 = sum(r_l_1, 2);
+r_r_1 = sum(r_r_1, 2);
