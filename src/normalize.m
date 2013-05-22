@@ -1,4 +1,4 @@
-function [normalized_data] = normalize(dataset, m, istd)
+function normalized_data = normalize(dataset, m, istd)
 %NORMALIZE(dataset, m, istd)
 % Normalizes given data and saves them into mat files
 % dataset: matrix holding the data
@@ -11,5 +11,5 @@ n = size(dataset, 2);
 m = repmat(m, 1, n);
 istd = repmat(istd, 1, n);
 
-% standardize by substracting mean and dividing by standard deviation
+% standardize by subtracting mean and dividing by standard deviation
 normalized_data = istd .* (dataset - m);

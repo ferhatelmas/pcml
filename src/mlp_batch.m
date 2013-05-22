@@ -63,7 +63,7 @@ max_val = 0;
 mean_val = 0;
 threshold = 10000;
 
-while(max_val - mean_val < threshold)  % difference is positive if val_err is increasing
+while(ec<50)  % difference is positive if val_err is increasing
     
     % process one batch of the inputs
     for i=1:batch_size:n
@@ -145,7 +145,7 @@ while(max_val - mean_val < threshold)  % difference is positive if val_err is in
                                             w_3, b_3);
 
 % calculate training error
-tr_err = [tr_err logerr(T,a_3)]
+tr_err = [tr_err logerr(T,a_3)];
 
 
 % do a forward pass to get updated class labels
@@ -159,8 +159,8 @@ val_err = [val_err logerr(T_val,a_3)]
 max_val = max(val_err);
 mean_val = mean(val_err);
 
-% calculate 0-1 error for training set
-zero_one_error = [zero_one_error mean(T_val.*a_3 < 0)]
+% calculate 0-1 error for validation set
+zero_one_error = [zero_one_error mean(T_val.*a_3 < 0)];
 
 % visualize errors
 ec = ec + 1;

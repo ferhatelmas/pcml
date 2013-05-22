@@ -9,22 +9,22 @@ function plotter(tr_err, val_err, zerone_err, ec)
 if(ec == 1) % initialize graph object in first trial
     close all
     figure(1);
-    semilogy(ec,tr_err(ec),'*r');
+    plot(ec,tr_err(ec),'*r');
     hold on
-    semilogy(ec,val_err(ec),'*g');
+    plot(ec,val_err(ec),'*g');
     hold on
-    semilogy(ec,zerone_err(ec),'*k');
+    plot(ec,zerone_err(ec),'*k');
     legend('Training','Validation','0-1');
     title('Training, Validation and Zero-One Errors for MLP Training');
     xlabel('Epoch #');
     ylabel('Error Value');
 else    
     figure(1);
-    semilogy(ec,tr_err(ec),'*r');
+    plot(ec,tr_err(ec),'*r');
     hold on
-    semilogy(ec,val_err(ec),'*g');
+    plot(ec,val_err(ec),'*g');
     hold on
-    semilogy(ec,zerone_err(ec),'*k');
+    plot(ec,zerone_err(ec),'*k');
 end
 
 xlim([0 ec+1]);
