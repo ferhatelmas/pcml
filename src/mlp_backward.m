@@ -40,7 +40,6 @@ r_lr_2 = diag(g_2_d_lr) * w_3' * r_3;
 r_l_1 = diag(g_1_d_l) * (w_l_2' * r_l_2 + (w_lr_2(:,1:h1))' * r_lr_2);
 r_r_1 = diag(g_1_d_r) * (w_r_2' * r_r_2 + (w_lr_2(:,h1+1:end))' * r_lr_2);
 
-
 % gradient calculations
 dw_3 = r_3 * z_2';
 dw_l_2 = r_l_2 * z_l_1';
