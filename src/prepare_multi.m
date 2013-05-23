@@ -1,7 +1,5 @@
-importfile('../data/norb_binary.mat');
+importfile('../data/norb_5class.mat');
 
-train_cat_s = train_cat_s - 2;
-test_cat_s = test_cat_s - 2;
 num_samples = size(train_left_s,2);
 
 % Create random permutation with 1/3 of total number of instances
