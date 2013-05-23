@@ -4,14 +4,10 @@ function e_sqr = sqrerr(t, a_3)
 % a_3: MLP 3rd activation level output vector/matrix for inputs in x
 % e_sqr: total error
 
-k = size(a_3,1); % number of targets
-n = size(a_3,2); % number of input samples
+[k,~] = size(a_3); % number of targets and samples
 
-% build 1-of-K encoding matrix of targets
-li = 0:k:(n-1)*k;
-t_t = zeros(k,n);
-t_t(li+t) = 1;
+T_T = encoder(t,k);
 
-l2_norms = sum((a_3 - t_t).^2,1);
+l2_norms = sum((a_3 - T_T).^2,1);
 e_sqr = 0.5*sum(l2_norms);
 
