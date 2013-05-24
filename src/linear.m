@@ -1,47 +1,32 @@
-function W = linear(X_L, X_R, t)
-%linear(X_L, X_R, T): linear classification with least squares Tikhonov
+function test_err = linear(X_L, X_R, T, X_L_test, X_R_test, T_test)
+%linear(X_L, X_R, T, v, M): linear classification with least squares Tikhonov
 %regularizer
-
-k = 5; % class size
-M = 10; % cross validation fold #
-v = 0:19; % set of possible regularizer parameter values
 
 % concatenate left and right camera, absorb bias into weight vector by
 % adding a 1 to the end
 [d,n] = size(X_L);
+[~,n_test] = size(X_L_test);
+
 X = [X_L; X_R; ones(1,n)]';
+X_test = [X_L_test; X_R_test; ones(1,n_test)]';
 
-T_T = encoder(t,k)';
+T_T = encoder(T);
+T_T_test = encoder(T_test);
 
-% 10-fold cross validation to pick v
-for j=1:length(v) % runs for regularization parameters
-    v_cur = v(j); 
-    for i=0:M:n % runs for validation folds
-        X_cv = X; % back-up X, not to destroy during cross validation
-        X_val = X_cv(i+1:i+M,:);
-        X_cv(i+1:i+M,:) = [];
-        X_tr = X_cv;
-        T_cv = T_T;
-        T_val = T_cv(i+1:i+M,:);
-        T_cv(i+1:i+M,:) = [];
-        T_tr = T_cv;
-        
-        % solve for optimum weight vector with training fold
-        A = X_tr'*X_tr + v*eye(d);
-        B = X_tr'*T_tr;
-        W = A\B;
-        
-        % test performance on validation fold
-        ...
-    end
-% calculate average over 10 trials, pick v as optimum if error is minimum
-...
-end
-    
+M = 10; % cross validation fold #
+v = 0:19; % set of possible regularizer parameter values
+
+% cross validation
+[bias_avg variance_avg] = cross_validation(X,T_T,v,M);
+% minimum of the difference is where optimum v is located at
+[~,ind] = min(abs(bias_avg - variance_avg));
+v_opt = v(ind);
    
 % solve for optimum weight vector using optimum v
 A = X'*X + v_opt*eye(d);
 B = X'*T_T;
 W = A\B;
+
+test_err = regerr(X_test,W, T_T_test, v_opt);
 
 

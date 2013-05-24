@@ -49,19 +49,15 @@ randp = randperm(n);
 X_L = X_L(:,randp);
 X_R = X_R(:,randp);
 T = T(randp);
+T_T = encoder(T);
 
 ec = 0; % epoch count
-val_err = 1e6;
-val_err_prev = 1e6;
 
 % initialize vectors to accumulate errors after each epoch
 tr_err = [];
 val_err = [];
 zero_one_error = [];
 
-max_val = 0;
-mean_val = 0;
-threshold = 10000;
 
 while(ec<50)  % difference is positive if val_err is increasing
     
@@ -145,8 +141,7 @@ while(ec<50)  % difference is positive if val_err is increasing
                                             w_3, b_3);
 
 % calculate training error
-tr_err = [tr_err sqerr(T,a_3)];
-
+tr_err = [tr_err sqerr(T_T,a_3)];
 
 % do a forward pass to get updated class labels
 [~, ~, ~, ~, ~, ~, ~, ~, a_3] = mlp_forward(X_L_val, X_R_val, ...

@@ -1,13 +1,10 @@
-function e_sqr = sqrerr(t, a_3)
+function e_sqr = sqrerr(T_T, Y)
 %SQRERROR: calculates square error for an input vector x
-% t: target value vectors for input x
-% a_3: MLP 3rd activation level output vector/matrix for inputs in x
+% T_T: 1-K encoding matrix for target vector t
+% Y: output vector/matrix for inputs in x/ 3rd level activation matrix for
+% K-class MLP
 % e_sqr: total error
 
-[k,~] = size(a_3); % number of targets and samples
-
-T_T = encoder(t,k);
-
-l2_norms = sum((a_3 - T_T).^2,1);
+l2_norms = sum((Y - T_T).^2,1);
 e_sqr = 0.5*sum(l2_norms);
 
