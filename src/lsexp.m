@@ -1,8 +1,8 @@
-function s = lsexp(v)
+function s = lsexp(y)
 %LSEXP(v)
 % logsumexp function
-% v: input vector
+% y: input matrix
 % s: sum
 
-s = log(sum(exp(v)));
+s = log(sum(exp(y),2));
 

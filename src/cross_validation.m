@@ -6,16 +6,6 @@ function [bias_avg variance_avg] = cross_validation(X, T_T, v, M)
 % v: set of Tikhonov constants
 % M: fold #
 
-% concatenate left and right camera, absorb bias into weight vector by
-% adding a 1 to the end
-[d,n] = size(X_L);
-X = [X_L; X_R; ones(1,n)]';
-
-M = 10; % cross validation fold #
-v = 0:19; % set of possible regularizer parameter values
-
-T_T = encoder(T)';
-
 % 10-fold cross validation to pick v
 tn = length(v); % number of trials
 for j=1:tn % runs for regularization parameters
@@ -51,13 +41,5 @@ for j=1:tn % runs for regularization parameters
     bias_avg(j) = bias_avg(j)/M;
     variance_avg(j) = variance_avg(j)/M;
 end
-
-
-    
-   
-% solve for optimum weight vector using optimum v
-A = X'*X + v_opt*eye(d);
-B = X'*T_T;
-W = A\B;
 
 

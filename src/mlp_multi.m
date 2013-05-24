@@ -50,6 +50,7 @@ X_L = X_L(:,randp);
 X_R = X_R(:,randp);
 T = T(randp);
 T_T = encoder(T);
+T_T_val = encoder(T_val);
 
 ec = 0; % epoch count
 
@@ -141,7 +142,7 @@ while(ec<50)  % difference is positive if val_err is increasing
                                             w_3, b_3);
 
 % calculate training error
-tr_err = [tr_err sqerr(T_T,a_3)];
+tr_err = [tr_err sqerr(T_T,a_3')];
 
 % do a forward pass to get updated class labels
 [~, ~, ~, ~, ~, ~, ~, ~, a_3] = mlp_forward(X_L_val, X_R_val, ...
@@ -150,7 +151,7 @@ tr_err = [tr_err sqerr(T_T,a_3)];
                                             w_3, b_3);
 % update validation error
 % val_err_prev = val_err;
-val_err = [val_err sqerr(T_val,a_3)]
+val_err = [val_err sqerr(T_T_val,a_3')]
 
 % calculate 0-1 error for validation set
 
