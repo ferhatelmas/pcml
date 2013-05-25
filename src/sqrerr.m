@@ -5,6 +5,6 @@ function e_sqr = sqrerr(T_T, Y)
 % K-class MLP
 % e_sqr: total error
 
-l2_norms = sum((Y - T_T).^2,1);
-e_sqr = 0.5*sum(l2_norms);
+l2_norms = sum((Y - T_T).^2,2);
+e_sqr = 0.5*mean(l2_norms);
 

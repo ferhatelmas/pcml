@@ -34,8 +34,7 @@ g_2_d_r = z_2 .* sigmoid(-a_r_2);
 g_2_d_lr = sigmoid(a_l_2) .* sigmoid(a_r_2);
 
 % residual calculations
-t_t = zeros(k,1);
-t_t(t) = 1; % linear encoding of t, t_t = delta(t(i))*t(i)
+t_t = encoder(t)';
 r_3 = a_3 - t_t; % squared error residual
 r_l_2 = diag(g_2_d_l) * w_3' * r_3;
 r_r_2 = diag(g_2_d_r) * w_3' * r_3;

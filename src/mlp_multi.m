@@ -16,6 +16,7 @@ function [hw_l_1, hw_r_1, hb_l_1, hb_r_1, hw_l_2, hw_r_2, hw_lr_2, hb_l_2, hb_r_
 % d - dimension of the input space
 % n - number of the inputs
 [d, n] = size(X_L);
+k = 5; % class size
 
 % layer 1 - weight initializations
 w_l_1 = initialize_weights(h1, d);
@@ -32,8 +33,8 @@ b_r_2 = initialize_weights(h2, 1);
 b_lr_2 = initialize_weights(h2, 1);
 
 % layer 3 - weight initializations
-w_3 = initialize_weights(5, h2);
-b_3 = initialize_weights(5, 1);
+w_3 = initialize_weights(k, h2);
+b_3 = initialize_weights(k, 1);
 
 % initialize history weight matrices and bias vectors
 hw_l_1 = w_l_1; hw_r_1 = w_r_1;
@@ -94,7 +95,6 @@ while(ec<50)  % difference is positive if val_err is increasing
                              z_2, ...
                              w_l_2, w_r_2, w_lr_2, w_3);
 
-
         % update weight matrices
         temp = gradient_descent(hw_l_1, w_l_1, dw_l_1, nu, mu);
         hw_l_1 = w_l_1; w_l_1 = temp;
@@ -142,7 +142,7 @@ while(ec<50)  % difference is positive if val_err is increasing
                                             w_3, b_3);
 
 % calculate training error
-tr_err = [tr_err sqerr(T_T,a_3')];
+tr_err = [tr_err sqrerr(T_T,a_3')];
 
 % do a forward pass to get updated class labels
 [~, ~, ~, ~, ~, ~, ~, ~, a_3] = mlp_forward(X_L_val, X_R_val, ...
@@ -151,12 +151,12 @@ tr_err = [tr_err sqerr(T_T,a_3')];
                                             w_3, b_3);
 % update validation error
 % val_err_prev = val_err;
-val_err = [val_err sqerr(T_T_val,a_3')]
+val_err = [val_err sqrerr(T_T_val,a_3')]
 
 % calculate 0-1 error for validation set
 
-[~,k] = max(a_3,[],1); % find index of maximum among each sample output
-zero_one_error = [zero_one_error mean(k ~= T_val)];
+[~,c] = max(a_3,[],1); % find index of maximum among each sample output
+zero_one_error = [zero_one_error mean(c-1 ~= T_val)];
 
 % visualize errors
 ec = ec + 1;
