@@ -4,6 +4,6 @@ function e_log = logerr_multi(X,W,T_T)
 % W: weight matrix [wk]'
 % T_T: 1-K encoded target matrix
 
-Y = X*W;
-e_log = sum(lsexp(Y) - T_T*Y);
+Y = W*X;
+e_log = mean(lsexp(Y) - diag(T_T*Y)');
 

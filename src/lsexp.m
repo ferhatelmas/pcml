@@ -4,5 +4,4 @@ function s = lsexp(y)
 % y: input matrix
 % s: sum
 
-s = log(sum(exp(y),2));
-
+s = log(sum(exp(y),1));

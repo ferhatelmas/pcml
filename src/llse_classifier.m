@@ -14,7 +14,7 @@ T_T = encoder(T);
 T_T_test = encoder(T_test);
 
 M = 10; % cross validation fold #
-v = 0:19; % set of possible regularizer parameter values
+v = 0:2; % set of possible regularizer parameter values
 
 % cross validation
 [bias_avg variance_avg] = cross_validation(X,T_T,v,M);
