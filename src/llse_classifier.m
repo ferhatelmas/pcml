@@ -1,5 +1,5 @@
-function test_err = linear(X_L, X_R, T, X_L_test, X_R_test, T_test)
-%linear(X_L, X_R, T, v, M): linear classification with least squares Tikhonov
+function test_err = llse_classifier(X_L, X_R, T, X_L_test, X_R_test, T_test)
+%LLSE_CLASSIFIER(X_L, X_R, T, X_L_test, X_R_test, T_test): linear classification with least squares Tikhonov
 %regularizer
 
 % concatenate left and right camera, absorb bias into weight vector by
@@ -25,7 +25,9 @@ v_opt = v(ind);
 % solve for optimum weight vector using optimum v
 A = X'*X + v_opt*eye(d);
 B = X'*T_T;
-W = A\B;
+R = chol(A); % cholesky decomposition of A where R'*R=A
+sol1 = R'\B;
+W = R\sol1;
 
 test_err = regerr(X_test,W, T_T_test, v_opt);
 

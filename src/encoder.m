@@ -7,7 +7,7 @@ function T_T = encoder(t)
 k = 5;
 n = length(t); % sample size
 
-li = 0:k:(n-1)*k;
+li = 1:k:n*k;
 T_T = zeros(k,n);
 T_T(li+t) = 1; %T_T(k,n) = 1 if t(n) = k, 0 o.w.
 T_T = T_T';

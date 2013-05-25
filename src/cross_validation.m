@@ -8,6 +8,7 @@ function [bias_avg variance_avg] = cross_validation(X, T_T, v, M)
 
 % 10-fold cross validation to pick v
 tn = length(v); % number of trials
+[n,d] = size(X);
 for j=1:tn % runs for regularization parameters
     v_cur = v(j); 
     % hold averages for each trial
@@ -26,7 +27,9 @@ for j=1:tn % runs for regularization parameters
         % solve for optimum weight vector with training fold
         A = X_tr'*X_tr + v_cur*eye(d);
         B = X_tr'*T_tr;
-        W = A\B;
+        R = chol(A); % cholesky decomposition of A where R'*R=A
+        sol1 = R'\B;
+        W = R\sol1;
         
         % test performance on training fold (bias), accumulate for average
         bias = regerr(X_tr, W, T_tr, v_cur);

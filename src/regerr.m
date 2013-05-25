@@ -2,6 +2,6 @@ function err = regerr(X,W,T_T,v)
 %REGERR(X,W,T)
 % squared error with Tikhonov regularization
 
-Y = W*X';
+Y = X*W;
 
-err = sqerr(T_T,Y) + v*sum(sum(W.^2,2),1);
+err = sqrerr(T_T,Y) + v*sum(sum(W.^2,2),1);
