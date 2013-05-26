@@ -14,7 +14,8 @@ for j=1:tn % runs for regularization parameters
     % hold averages for each trial
     bias_avg = zeros(1,tn);
     variance_avg = zeros(1,tn);
-    for i=0:M:n % runs for validation folds
+    for i=0:M:n-1 % runs for validation folds
+        disp(i);
         X_cv = X; % back-up X, not to destroy during cross validation
         X_val = X_cv(i+1:i+M,:);
         X_cv(i+1:i+M,:) = [];
