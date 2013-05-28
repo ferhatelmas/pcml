@@ -13,15 +13,16 @@ for j=1:tn % runs for regularization parameters
     v_cur = v(j); 
     % hold averages for each trial
     val_err_avg = zeros(1,tn);
-    for i=0:M:n-1 % runs for validation folds
+    c = n/M;
+    for i=0:c:n-1 % runs for validation folds
         disp(i);
         X_cv = X; % back-up X, not to destroy during cross validation
-        X_val = X_cv(i+1:i+M,:);
-        X_cv(i+1:i+M,:) = [];
+        X_val = X_cv(i+1:i+c,:);
+        X_cv(i+1:i+c,:) = [];
         X_tr = X_cv;
         T_cv = T_T;
-        T_val = T_cv(i+1:i+M,:);
-        T_cv(i+1:i+M,:) = [];
+        T_val = T_cv(i+1:i+c,:);
+        T_cv(i+1:i+c,:) = [];
         T_tr = T_cv;
         
         % normalize folds
