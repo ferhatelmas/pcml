@@ -25,9 +25,9 @@ for j=1:tn % runs for regularization parameters
         T_tr = T_cv;
         
         % normalize folds
-        [m,istd] = find_par(X_tr);
-        X_tr = normalize(X_tr,m,istd);
-        X_val = normalize(X_val,m,istd);
+        [m,istd] = find_par(X_tr');
+        X_tr = normalize(X_tr',m,istd)';
+        X_val = normalize(X_val',m,istd)';
         
         % solve for optimum weight vector with training fold
         A = X_tr'*X_tr + v_cur*eye(d);

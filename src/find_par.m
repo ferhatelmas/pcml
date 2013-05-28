@@ -5,9 +5,13 @@ function [m istd] = find_par(data)
 % m: Mean throuhgout the rows
 % istd: Inverse standard deviation
 
+
+n = size(data,2);
+
 m = mean(data, 2);
 avg_rep = repmat(m, 1, n);
-temp = (train_data - avg_rep) .^ 2;
+temp = (data - avg_rep) .^ 2;
 dev = sqrt(sum(temp, 2) ./ n);
 istd = 1 ./ dev;
+
 end
