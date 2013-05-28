@@ -2,17 +2,8 @@ importfile('../data/norb_5class.mat');
 
 n = size(train_left_s,2);
 
-m_l = mean(train_left_s, 2);
-m_rep = repmat(m_l, 1, n);
-temp = (train_left_s - m_rep) .^ 2;
-dev = sqrt(sum(temp, 2) ./ n);
-istd_l = 1 ./ dev;
-
-m_r = mean(train_right_s, 2);
-m_rep = repmat(m_r, 1, n);
-temp = (train_right_s - m_rep) .^ 2;
-dev = sqrt(sum(temp, 2) ./ n);
-istd_r = 1 ./ dev;
+[m_l, istd_l] = find_par(train_left_s);
+[m_r, istd_r] = find_par(train_right_s);
 
 X_L = train_left_s;
 X_R = train_right_s;
