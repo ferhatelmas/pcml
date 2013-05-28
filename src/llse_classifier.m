@@ -14,10 +14,10 @@ T_T = encoder(T);
 T_T_test = encoder(T_test);
 
 M = 10; % cross validation fold #
-v = 5; % set of possible regularizer parameter values
+v = 10; % set of possible regularizer parameter values
 
 % cross validation
-val_err_avg = cross_validation(X,T_T,v,M);
+val_err_avg = cross_validation(X(:,1:end-1),T_T,v,M);
 % minimum of validation error is where optimum v is located at
 [~,ind] = min(val_err_avg);
 v_opt = v(ind);

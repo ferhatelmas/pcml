@@ -6,7 +6,7 @@ function val_err_avg = cross_validation(X, T_T, v, M)
 % v: set of Tikhonov constants
 % M: fold #
 
-% 10-fold cross validation to pick v
+% n-fold cross validation to pick v
 tn = length(v); % number of trials
 [n,d] = size(X);
 for j=1:tn % runs for regularization parameters
@@ -27,11 +27,11 @@ for j=1:tn % runs for regularization parameters
         
         % normalize folds
         [m,istd] = find_par(X_tr');
-        X_tr = normalize(X_tr',m,istd)';
-        X_val = normalize(X_val',m,istd)';
+        X_tr = [normalize(X_tr',m,istd)' ones(size(X_tr,1),1)];
+        X_val = [normalize(X_val',m,istd)' ones(size(X_val,1),1)];
         
         % solve for optimum weight vector with training fold
-        A = X_tr'*X_tr + v_cur*eye(d);
+        A = X_tr'*X_tr + v_cur*eye(d+1);
         B = X_tr'*T_tr;
         W = A\B;
 
