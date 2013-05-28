@@ -154,7 +154,6 @@ tr_err = [tr_err sqrerr(T_T,a_3')];
 val_err = [val_err sqrerr(T_T_val,a_3')]
 
 % calculate 0-1 error for validation set
-
 [~,c] = max(a_3,[],1); % find index of maximum among each sample output
 zero_one_error = [zero_one_error mean(c-1 ~= T_val)];
 
