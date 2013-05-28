@@ -8,4 +8,4 @@ X_test = normalize([test_left_s; test_right_s], m, istd);
 T = train_cat_s;
 T_test = test_cat_s;
 
-clear train_left_s train_right_s train_cat_s test_cat_s test_left_s test_right_s m_l m_r istd_l istd_r n dev m_rep temp
+clear train_left_s train_right_s train_cat_s test_cat_s test_left_s test_right_s m istd notes

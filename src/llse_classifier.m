@@ -2,11 +2,11 @@ function test_err = llse_classifier(X, T, X_test, T_test)
 %LLSE_CLASSIFIER(X_L, X_R, T, X_L_test, X_R_test, T_test): linear classification with least squares Tikhonov
 %regularizer
 
-% concatenate left and right camera, absorb bias into weight vector by
-% adding a 1 to the end
+% get number of cases
 [~,n] = size(X);
 [~,n_test] = size(X_test);
 
+% adding a 1 to the end as bias
 X = [X; ones(1,n)]';
 X_test = [X_test; ones(1,n_test)]';
 
