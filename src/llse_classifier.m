@@ -17,18 +17,17 @@ M = 10; % cross validation fold #
 v = 0:2; % set of possible regularizer parameter values
 
 % cross validation
-[bias_avg variance_avg] = cross_validation(X,T_T,v,M);
-% minimum of the difference is where optimum v is located at
-[~,ind] = min(abs(bias_avg - variance_avg));
+val_err_avg = cross_validation(X,T_T,v,M);
+% minimum of validation error is where optimum v is located at
+[~,ind] = min(val_err_avg);
 v_opt = v(ind);
    
 % solve for optimum weight vector using optimum v
 A = X'*X + v_opt*eye(d);
 B = X'*T_T;
-R = chol(A); % cholesky decomposition of A where R'*R=A
-sol1 = R'\B;
-W = R\sol1;
+W = A\B;
 
+% normalize test set with parameters of training set
+[m,istd] = find_par(X);
+X_test = normalize(X_test,m,istd);
 test_err = regerr(X_test,W, T_T_test, v_opt);
-
-

@@ -1,4 +1,4 @@
-function [bias_avg variance_avg] = cross_validation(X, T_T, v, M)
+function val_err_avg = cross_validation(X, T_T, v, M)
 %cross_validation(X, T_T, v, M)
 % M-fold cross validation to pick v
 % X: concatenated input matrix
@@ -12,8 +12,7 @@ tn = length(v); % number of trials
 for j=1:tn % runs for regularization parameters
     v_cur = v(j); 
     % hold averages for each trial
-    bias_avg = zeros(1,tn);
-    variance_avg = zeros(1,tn);
+    val_err_avg = zeros(1,tn);
     for i=0:M:n-1 % runs for validation folds
         disp(i);
         X_cv = X; % back-up X, not to destroy during cross validation
@@ -25,25 +24,23 @@ for j=1:tn % runs for regularization parameters
         T_cv(i+1:i+M,:) = [];
         T_tr = T_cv;
         
+        % normalize folds
+        [m,istd] = find_par(X_tr);
+        X_tr = normalize(X_tr,m,istd);
+        X_val = normalize(X_val,m,istd);
+        
         % solve for optimum weight vector with training fold
         A = X_tr'*X_tr + v_cur*eye(d);
         B = X_tr'*T_tr;
-        R = chol(A); % cholesky decomposition of A where R'*R=A
-        sol1 = R'\B;
-        W = R\sol1;
-        
-        % test performance on training fold (bias), accumulate for average
-        bias = regerr(X_tr, W, T_tr, v_cur);
-        bias_avg(j) = bias_avg(j) + bias;
-        
+        W = A\B;
+
         % test performance on validation fold (variance), accumulate for
         % average
         variance = regerr(X_val, W, T_val, v_cur);
-        variance_avg(j) = variance_avg(j) + variance;
+        val_err_avg(j) = val_err_avg(j) + variance;
     end
     % calculate average over 10 trials
-    bias_avg(j) = bias_avg(j)/M;
-    variance_avg(j) = variance_avg(j)/M;
+    val_err_avg(j) = variance_avg(j)/M;
 end
 
 
