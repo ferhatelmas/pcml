@@ -41,7 +41,7 @@ for j=1:tn % runs for regularization parameters
         val_err_avg(j) = val_err_avg(j) + variance;
     end
     % calculate average over 10 trials
-    val_err_avg(j) = variance_avg(j)/M;
+    val_err_avg(j) = val_err_avg(j)/M;
 end
 
 
