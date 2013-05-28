@@ -1,4 +1,4 @@
-function [train_data, val_data, m, inverse_dev] = splitdata(dataset, val_columns)
+function [train_data, val_data, m, istd] = splitdata(dataset, val_columns)
 %SPLITDATA(dataset)
 %  Splits training dataset into two as training (2/3) and validation (1/3)
 %  and saves them into a mat file
@@ -14,8 +14,4 @@ train_data = dataset;
 n = size(train_data, 2);
 
 % calculate mean and std_deviation of dataset
-m = mean(train_data, 2);
-m_rep = repmat(m, 1, n);
-temp = (train_data - m_rep) .^ 2;
-dev = sqrt(sum(temp, 2) ./ n);
-inverse_dev = 1 ./ dev;
+[m istd] = find_par(train_data);
