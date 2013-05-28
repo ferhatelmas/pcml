@@ -1,6 +1,7 @@
 function test_err = logistic(X_L, X_R, T, X_L_val, X_R_val, T_val, X_L_test, X_R_test, T_test, nu, mu)
 %LOGISTIC(X_L, X_R, T, X_L_val, X_R_val, T_val, X_L_test, X_R_test, T_test)
 % linear classifier with logistic error and gradient descent
+% CALL PREPARE_MULTI BEFORE RUNNING
 
 k = 5;
 [d,n] = size(X_L);

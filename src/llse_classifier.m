@@ -1,6 +1,7 @@
 function test_err = llse_classifier(X, T, X_test, T_test)
 %LLSE_CLASSIFIER(X_L, X_R, T, X_L_test, X_R_test, T_test): linear classification with least squares Tikhonov
 %regularizer
+% CALL PREPARE_LINEAR BEFORE RUNNING
 
 % get number of cases
 [~,n] = size(X);
