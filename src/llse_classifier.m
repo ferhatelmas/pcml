@@ -15,8 +15,8 @@ T_T = encoder(T);
 T_T_test = encoder(T_test);
 
 M = 10; % cross validation fold #
-c = 0.1;
-v = c*2.^(0:9); % set of possible regularizer parameter values
+c = 1;
+v = [0 c*2.^(0:9)]; % set of possible regularizer parameter values
 
 % cross validation
 val_err_avg = cross_validation(X(:,1:end-1),T_T,v,M);
@@ -29,5 +29,5 @@ A = X'*X + v_opt*eye(size(X,2));
 B = X'*T_T;
 W = A\B;
 
-% normalize test set with parameters of training set
-test_err = regerr(X_test,W, T_T_test, v_opt);
+% calculate test error for optimum W
+test_err = regerr(X_test, W, T_T_test, v_opt);

@@ -30,6 +30,7 @@ T_test = evalin('base', 'T_test');
    
 % Calculates squared error for the predicted class labels                                        
 sq_error_test = sqrerr(encoder(T_test)', a_3);
-confused = confusionmat(T_test,a_3); % confusion matrix
+[~,c] = max(a_3,[],1); % find index of maximum among each sample output
+confused = confusionmat(T_test,c-1,'order',[0,1,2,3,4]); % confusion matrix
 
 end
