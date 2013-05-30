@@ -1,10 +1,10 @@
 function plotter(tr_err, val_err, zerone_err, ec)
-%PLOTTER(TR_ERR, VAL_ERR)
-% plots training and validation errors on the same figure
-% tr_err: vector of training errors for an epoch
-% val_err: vector of validation errors for an epoch
-% tn: epoch number
-% n: number of instances used for training and validation
+%PLOTTER(tr_err, val_err, zerone_err, ec)
+% plots training, validation and zero_one errors on the same figure
+% tr_err: vector of training errors
+% val_err: vector of validation errors
+% zerone_err: vector of zero-one errors
+% ec: epoch number
 
 if(ec == 1) % initialize graph object in first trial
     close all

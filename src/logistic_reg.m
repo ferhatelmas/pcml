@@ -1,4 +1,8 @@
-function test_err = logistic(X_L, X_R, T, X_L_val, X_R_val, T_val, X_L_test, X_R_test, T_test, nu, mu)
+<<<<<<< HEAD:src/logistic_reg.m
+function [tr_err val_err zero_one_err test_err] = logistic_reg(X_L, X_R, T, X_L_val, X_R_val, T_val, X_L_test, X_R_test, T_test, nu, mu)
+=======
+function [tr_err val_err zero_one_err test_err] = logistic(X_L, X_R, T, X_L_val, X_R_val, T_val, X_L_test, X_R_test, T_test, nu, mu)
+>>>>>>> 2496a5d13b90f2c1d472d85af64a78b00b480eac:src/logistic.m
 %LOGISTIC(X_L, X_R, T, X_L_val, X_R_val, T_val, X_L_test, X_R_test, T_test)
 % linear classifier with logistic error and gradient descent
 % CALL PREPARE_MULTI BEFORE RUNNING
@@ -21,15 +25,20 @@ T_T_val = encoder(T_val);
 W = initialize_weights(k,2*d+1);
 ec = 0; % epoch count
 hdW = W;
+tr_err = [];
+val_err = [];
 
 while(ec < 1000)
     Y = W*X;
     dW = ((exp(Y-repmat(lsexp(Y),k,1)) - T_T')*X')./n; % calculate gradient
     temp = gradient_descent(hdW, W, dW, nu, mu);
     hdW = W; W = temp;
-    tr_err = logerr_multi(X,W,T_T) % training error with updated W
-    val_err = logerr_multi(X_val,W,T_T_val); % validation error with updated W
+    tr_err = [tr_err logerr_multi(X,W,T_T)]; % training error with updated W
+    val_err = [val_err logerr_multi(X_val,W,T_T_val)]; % validation error with updated W
+    [~,c] = max(W*X,[],1); % find index of maximum among each sample output
+    zero_one_err = [zero_one_err mean(c-1 ~= T_val)]
     ec = ec+1;
+    plotter(tr_err, val_err, zero_one_err, ec);
 end
 
 test_err = logerr_multi(X_test,W,T_T_test); % test error with optimized W
