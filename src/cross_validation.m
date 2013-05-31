@@ -24,16 +24,10 @@ for j=1:tn % runs for regularization parameters
     
     for i=0:c:n-1 % runs for validation folds
         
-        fold = fold + 1
+        fold = fold + 1;
         % build training and validation folds
-        X_cv = X; % back-up X, not to destroy during cross validation
-        X_val = X_cv(i+1:i+c,:);
-        X_cv(i+1:i+c,:) = [];
-        X_tr = X_cv;
-        T_cv = T_T;
-        T_val = T_cv(i+1:i+c,:);
-        T_cv(i+1:i+c,:) = [];
-        T_tr = T_cv;
+        [X_tr, X_val] = divide(X, i, c);
+        [T_tr, T_val] = divide(T_T, i, c);
         
         % normalize folds
         [m,istd] = find_par(X_tr');
@@ -65,3 +59,16 @@ v_opt = v(ind);
 
 % visualize results
 lr_plotter(v, tr_err_avg, val_err_avg, std_devs, v_opt, ind)
+end
+
+function [tr, val] = divide(m, i, c)
+%DIVIDE(m, i, c)
+% divides matrix m to two parts as training and validation
+% m: matrix to be divided
+% i: start index of fold
+% c: # of elements inside of fold
+
+tr = m; % back-up X, not to destroy during cross validation
+val = tr(i+1:i+c, :);
+tr(i+1:i+c, :) = [];
+end

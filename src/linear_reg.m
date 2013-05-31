@@ -1,5 +1,5 @@
 function test_err = linear_reg(X, T, X_test, T_test)
-%LINEAR_REG(X_L, X_R, T, X_L_test, X_R_test, T_test)
+%LINEAR_REG(X, T, X_test, T_test)
 % linear regression with Tikhonov regularizer
 % CALL PREPARE_LINEAR BEFORE RUNNING
 
@@ -15,8 +15,8 @@ T_T = encoder(T);
 T_T_test = encoder(T_test);
 
 M = 10; % cross validation fold #
-c = 1e-6;
-v = [0 c*10.^(0:9)]; % set of possible regularizer parameter values
+c = 1e-16;
+v = [0 c*10.^(0:19)]; % set of possible regularizer parameter values
 
 % cross validation
 v_opt = cross_validation(X(:,1:end-1),T_T,v,M);
