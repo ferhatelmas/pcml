@@ -61,9 +61,9 @@ tr_err = zeros(1,max_ec);
 val_err = zeros(1,max_ec);
 zero_one_error = zeros(1,max_ec);
 
-while(sum(early_stop > 1e-6*ones(1,2)) > 0) 
+while(sum(early_stop > 1e-7*ones(1,2)) > 0) 
     es = mod(es + 1,2);
-    ec = ec+1;
+    ec = ec+1
     % process one batch of the inputs
     for i=1:batch_size:n
         % upper index to slice input matrices
@@ -154,12 +154,12 @@ tr_err(ec) = logerr(T,a_3);
                                             w_3, b_3);
 % update validation error
 % val_err_prev = val_err;
-val_err(ec) = logerr(T_val,a_3)
+val_err(ec) = logerr(T_val,a_3);
+early_stop(es+1) = abs(val_err(ec) - prev_err);
+prev_err = val_err(ec);
 
 % calculate 0-1 error for validation set
 zero_one_error(ec) = mean(T_val.*a_3 < 0);
-early_stop(es+1) = abs(zero_one_err(ec) - prev_err);
-prev_err = zero_one_err(ec);
 
 % visualize errors
 plotter(tr_err, val_err, zero_one_error, ec);
