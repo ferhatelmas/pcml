@@ -56,14 +56,18 @@ T_T_val = encoder(T_val);
 
 ec = 0; % epoch count
 max_ec = 100;
+early_stop = ones(1,2); % stores last two differences btw consecutive zero_one errors
+es = 0;
+prev_err = 0;
 
 % initialize vectors to accumulate errors after each epoch
 tr_err = zeros(1,max_ec);
 val_err = zeros(1,max_ec);
 zero_one_error = zeros(1,max_ec);
 
-while(ec < max_ec)  % difference is positive if val_err is increasing
-    
+
+while(sum(early_stop > 1e-6*ones(1,2)) > 0) 
+    es = mod(es + 1,2);
     ec = ec+1;
     
     % process one batch of the inputs
@@ -159,6 +163,8 @@ val_err(ec) = sqrerr(T_T_val',a_3);
 % calculate 0-1 error for validation set
 [~,c] = max(a_3,[],1); % find index of maximum among each sample output
 zero_one_error(ec) = mean(c-1 ~= T_val);
+early_stop(es+1) = abs(zero_one_err(ec) - prev_err);
+prev_err = zero_one_err(ec);
 disp(zero_one_error(ec));
 
 % visualize errors

@@ -51,8 +51,9 @@ X_R = X_R(:,randp);
 T = T(randp);
 
 ec = 0; % epoch count
-val_err = 1e6;
-val_err_prev = 1e6;
+early_stop = ones(1,2); % stores last two differences btw consecutive zero_one errors
+es = 0;
+prev_err = 0;
 
 % initialize vectors to accumulate errors after each epoch
 max_ec = 50;
@@ -60,8 +61,8 @@ tr_err = zeros(1,max_ec);
 val_err = zeros(1,max_ec);
 zero_one_error = zeros(1,max_ec);
 
-while(ec< max_ec)  % difference is positive if val_err is increasing
-    
+while(sum(early_stop > 1e-6*ones(1,2)) > 0) 
+    es = mod(es + 1,2);
     ec = ec+1;
     % process one batch of the inputs
     for i=1:batch_size:n
@@ -157,6 +158,8 @@ val_err(ec) = logerr(T_val,a_3)
 
 % calculate 0-1 error for validation set
 zero_one_error(ec) = mean(T_val.*a_3 < 0);
+early_stop(es+1) = abs(zero_one_err(ec) - prev_err);
+prev_err = zero_one_err(ec);
 
 % visualize errors
 plotter(tr_err, val_err, zero_one_error, ec);
