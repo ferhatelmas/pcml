@@ -55,13 +55,16 @@ T_T = encoder(T);
 T_T_val = encoder(T_val);
 
 ec = 0; % epoch count
+max_ec = 100;
 
 % initialize vectors to accumulate errors after each epoch
-tr_err = [];
-val_err = [];
-zero_one_error = [];
+tr_err = zeros(1,max_ec);
+val_err = zeros(1,max_ec);
+zero_one_error = zeros(1,max_ec);
 
-while(ec<100)  % difference is positive if val_err is increasing
+while(ec < max_ec)  % difference is positive if val_err is increasing
+    
+    ec = ec+1;
     
     % process one batch of the inputs
     for i=1:batch_size:n
@@ -142,7 +145,7 @@ while(ec<100)  % difference is positive if val_err is increasing
                                             w_3, b_3);
 
 % calculate training error
-tr_err = [tr_err sqrerr(T_T',a_3)];
+tr_err(ec) = sqrerr(T_T',a_3);
 
 % do a forward pass to get updated class labels
 [~, ~, ~, ~, ~, ~, ~, ~, a_3] = mlp_forward(X_L_val, X_R_val, ...
@@ -151,14 +154,14 @@ tr_err = [tr_err sqrerr(T_T',a_3)];
                                             w_3, b_3);
 % update validation error
 % val_err_prev = val_err;
-val_err = [val_err sqrerr(T_T_val',a_3)];
+val_err(ec) = sqrerr(T_T_val',a_3);
 
 % calculate 0-1 error for validation set
 [~,c] = max(a_3,[],1); % find index of maximum among each sample output
-zero_one_error = [zero_one_error mean(c-1 ~= T_val)]
+zero_one_error(ec) = mean(c-1 ~= T_val);
+disp(zero_one_error(ec));
 
 % visualize errors
-ec = ec + 1;
 plotter(tr_err, val_err, zero_one_error, ec);
 
 end

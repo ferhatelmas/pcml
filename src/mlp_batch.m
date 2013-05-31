@@ -55,12 +55,14 @@ val_err = 1e6;
 val_err_prev = 1e6;
 
 % initialize vectors to accumulate errors after each epoch
-tr_err = [];
-val_err = [];
-zero_one_error = [];
+max_ec = 50;
+tr_err = zeros(1,max_ec);
+val_err = zeros(1,max_ec);
+zero_one_error = zeros(1,max_ec);
 
-while(ec<=50)  % difference is positive if val_err is increasing
+while(ec< max_ec)  % difference is positive if val_err is increasing
     
+    ec = ec+1;
     % process one batch of the inputs
     for i=1:batch_size:n
         % upper index to slice input matrices
@@ -141,7 +143,7 @@ while(ec<=50)  % difference is positive if val_err is increasing
                                             w_3, b_3);
 
 % calculate training error
-tr_err = [tr_err logerr(T,a_3)];
+tr_err(ec) = logerr(T,a_3);
 
 
 % do a forward pass to get updated class labels
@@ -151,16 +153,12 @@ tr_err = [tr_err logerr(T,a_3)];
                                             w_3, b_3);
 % update validation error
 % val_err_prev = val_err;
-val_err = [val_err logerr(T_val,a_3)];
-disp(val_err(ec+1))
-max_val = max(val_err);
-mean_val = mean(val_err);
+val_err(ec) = logerr(T_val,a_3)
 
 % calculate 0-1 error for validation set
-zero_one_error = [zero_one_error mean(T_val.*a_3 < 0)];
+zero_one_error(ec) = mean(T_val.*a_3 < 0);
 
 % visualize errors
-ec = ec + 1;
 plotter(tr_err, val_err, zero_one_error, ec);
 
 end
