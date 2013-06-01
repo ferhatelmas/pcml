@@ -66,9 +66,9 @@ val_err = zeros(1,max_ec);
 zero_one_error = zeros(1,max_ec);
 
 
-while(sum(early_stop > 1e-6*ones(1,2)) > 0) 
+while(sum(early_stop > 1e-8*ones(1,2)) > 0) 
     es = mod(es + 1,2);
-    ec = ec+1;
+    ec = ec+1
     
     % process one batch of the inputs
     for i=1:batch_size:n
@@ -163,9 +163,8 @@ val_err(ec) = sqrerr(T_T_val',a_3);
 % calculate 0-1 error for validation set
 [~,c] = max(a_3,[],1); % find index of maximum among each sample output
 zero_one_error(ec) = mean(c-1 ~= T_val);
-early_stop(es+1) = abs(zero_one_err(ec) - prev_err);
-prev_err = zero_one_err(ec);
-disp(zero_one_error(ec));
+early_stop(es+1) = abs(zero_one_error(ec) - prev_err);
+prev_err = zero_one_error(ec);
 
 % visualize errors
 plotter(tr_err, val_err, zero_one_error, ec);

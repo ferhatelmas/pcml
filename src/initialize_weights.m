@@ -5,5 +5,5 @@ function matrix = initialize_weights(m, n)
 % m: output size
 % n: input size
 
-% matrix = normrnd(0, sqrt(1/n), m, n);
-matrix = 0.1*ones(m,n);
+matrix = normrnd(0, sqrt(1/(100*n)), m, n);
+% matrix = 0.1*ones(m,n);
