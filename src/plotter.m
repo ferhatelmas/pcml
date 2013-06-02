@@ -8,7 +8,7 @@ function plotter(tr_err, val_err, zerone_err, ec)
 
 if(ec == 1) % initialize graph object in first trial
     close all
-    figure(1);
+    h = figure(1);
     plot(ec,tr_err(ec),'*r');
     hold on
     plot(ec,val_err(ec),'*g');
@@ -19,7 +19,7 @@ if(ec == 1) % initialize graph object in first trial
     xlabel('Epoch #');
     ylabel('Error Value');
 else    
-    figure(1);
+    h = figure(1);
     plot(ec,tr_err(ec),'*r');
     hold on
     plot(ec,val_err(ec),'*g');
@@ -27,6 +27,8 @@ else
     plot(ec,zerone_err(ec),'*k');
 end
 
+% set font size to larger one
+set(findall(h, 'type', 'text'), 'fontSize', 18)
 xlim([0 ec+1]);
 %ylim([0 1.1]); % upper-limit is random and can be changed later
 hold on
