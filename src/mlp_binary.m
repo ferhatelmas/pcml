@@ -17,10 +17,10 @@ T = evalin('base', 'T');
 T_val = evalin('base', 'T_val');
 T_test = evalin('base', 'T_test');
 
-% Runs mlp_batch to get optimum weights and biases
+% Runs mlp_train_binary to get optimum weights and biases
 [w_l_1, w_r_1, b_l_1, b_r_1, ...
  w_l_2, w_r_2, w_lr_2, b_l_2, b_r_2, b_lr_2, ...
- w_3, b_3, tr_err, val_err, zero_one_error] = mlp_batch(X_L, X_R, T, X_L_val, X_R_val, T_val, h1, h2, nu, mu, batch_size);
+ w_3, b_3, tr_err, val_err, zero_one_error] = mlp_train_binary(X_L, X_R, T, X_L_val, X_R_val, T_val, h1, h2, nu, mu, batch_size);
 
 % Does a forward pass to predict class labels
 [~, ~, ~, ~, ~, ~, ~, ~, a_3] = mlp_forward(X_L_test, X_R_test, ...

@@ -1,5 +1,5 @@
-function [dw_l_1, dw_r_1, dw_l_2, dw_r_2, dw_lr_2, dw_3, r_l_1, r_r_1, r_l_2, r_r_2, r_lr_2, r_3] = mlp_multi_backward(x_l, x_r, t, a_l_1, a_r_1, a_l_2, a_r_2, a_lr_2, a_3, z_l_1, z_r_1, z_2, w_l_2, w_r_2, w_lr_2, w_3)
-%MLP_MULTI_BACKWARD(x_l, x_r, t, a_l_1, a_r_1, a_l_2, a_r_2, a_lr_2, a_3, z_l_1, z_r_1, z_2, w_l_2, w_r_2, w_lr_2, w_3)
+function [dw_l_1, dw_r_1, dw_l_2, dw_r_2, dw_lr_2, dw_3, r_l_1, r_r_1, r_l_2, r_r_2, r_lr_2, r_3] = mlp_backward_multi(x_l, x_r, t, a_l_1, a_r_1, a_l_2, a_r_2, a_lr_2, a_3, z_l_1, z_r_1, z_2, w_l_2, w_r_2, w_lr_2, w_3)
+%MLP_BACKWARD_MULTI(x_l, x_r, t, a_l_1, a_r_1, a_l_2, a_r_2, a_lr_2, a_3, z_l_1, z_r_1, z_2, w_l_2, w_r_2, w_lr_2, w_3)
 % Calculates gradients for weight and bias vectors using backpropogation.
 % x_l, x_r: left and right input vectors
 % t: assigned class value
