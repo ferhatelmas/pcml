@@ -149,7 +149,7 @@ while(sum(early_stop > 1e-8*ones(1,2)) > 0)
                                             w_3, b_3);
 
 % calculate training error
-tr_err(ec) = sqrerr(T_T',a_3);
+tr_err(ec) = squared_error(T_T',a_3);
 
 % do a forward pass to get updated class labels
 [~, ~, ~, ~, ~, ~, ~, ~, a_3] = mlp_forward(X_L_val, X_R_val, ...
@@ -158,7 +158,7 @@ tr_err(ec) = sqrerr(T_T',a_3);
                                             w_3, b_3);
 % update validation error
 % val_err_prev = val_err;
-val_err(ec) = sqrerr(T_T_val',a_3);
+val_err(ec) = squared_error(T_T_val',a_3);
 
 % calculate 0-1 error for validation set
 [~,c] = max(a_3,[],1); % find index of maximum among each sample output

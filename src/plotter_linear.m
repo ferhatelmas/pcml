@@ -1,5 +1,5 @@
-function linear_plotter(v, tr_err_avg, val_err_avg, std_devs, v_opt, v_opt_i)
-%LINEAR_PLOTTER(v, tr_err_avg, val_err_avg, std_devs)
+function plotter_linear(v, tr_err_avg, val_err_avg, std_devs, v_opt, v_opt_i)
+%PLOTTER_LINEAR(v, tr_err_avg, val_err_avg, std_devs)
 % plots linear regression validation errors, mean & standard deviation
 % v: vector of Tikhonov regularizers
 % val_err_avg: vector of cross validation error averages for parameters v

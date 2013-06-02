@@ -37,7 +37,7 @@ for i=1:h1
                             w_l_2, b_l_2, w_r_2, b_r_2, w_lr_2, b_lr_2, ...
                             w_3, b_3);
                        
-        error_base = sqrerr(t_t, a_3);
+        error_base = squared_error(t_t, a_3);
        
         % add small values to weights
         updated_w_l_1 = w_l_1;
@@ -65,7 +65,7 @@ for i=1:h1
                                                 z_2, ...
                                                 w_l_2, w_r_2, w_lr_2, w_3);
 
-        error_left = sqrerr(t_t, a_3);
+        error_left = squared_error(t_t, a_3);
         derivative_left = (error_left - error_base) / small_increment;
         diff_left = abs(derivative_left - dw_l_1(i, j));
          
@@ -88,7 +88,7 @@ for i=1:h1
                                                 z_2, ...
                                                 w_l_2, w_r_2, w_lr_2, w_3);
                                   
-        error_right = sqrerr(t_t, a_3);
+        error_right = squared_error(t_t, a_3);
         derivative_right = (error_right - error_base) / small_increment;
         diff_right = abs(derivative_right - dw_r_1(i, j));
                                          

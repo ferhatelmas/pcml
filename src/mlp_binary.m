@@ -29,7 +29,7 @@ T_test = evalin('base', 'T_test');
                                             w_3, b_3);
    
 % Calculates logistic and zero error for the predicted class labels                                        
-logistic_error_test = logerr(T_test, a_3);
+logistic_error_test = logistic_error_binary(T_test, a_3);
 patterns = T_test.*a_3;
 zero_one_error_test = mean(patterns < 0);
 errored = find(patterns<0); % indices of misclassified patterns

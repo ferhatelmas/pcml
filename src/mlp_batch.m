@@ -144,7 +144,7 @@ while(sum(early_stop > 1e-7*ones(1,2)) > 0)
                                             w_3, b_3);
 
 % calculate training error
-tr_err(ec) = logerr(T,a_3);
+tr_err(ec) = logistic_error_binary(T,a_3);
 
 
 % do a forward pass to get updated class labels
@@ -153,8 +153,7 @@ tr_err(ec) = logerr(T,a_3);
                                             w_l_2, b_l_2, w_r_2, b_r_2, w_lr_2, b_lr_2, ...
                                             w_3, b_3);
 % update validation error
-% val_err_prev = val_err;
-val_err(ec) = logerr(T_val,a_3);
+val_err(ec) = logistic_error_binary(T_val,a_3);
 early_stop(es+1) = abs(val_err(ec) - prev_err);
 prev_err = val_err(ec);
 
