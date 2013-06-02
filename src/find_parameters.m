@@ -1,5 +1,5 @@
-function [m, istd] = find_par(data)
-%FIND_VAR(data)
+function [m, istd] = find_parameters(data)
+%FIND_PARAMETERS(data)
 % Find mean and deviation
 % calculate mean and std_deviation of dataset
 % m: Mean throuhgout the rows

@@ -30,7 +30,7 @@ for j=1:tn % runs for regularization parameters
         [T_tr, T_val] = divide(T_T, i, c);
         
         % normalize folds
-        [m,istd] = find_par(X_tr');
+        [m,istd] = find_parameters(X_tr');
         X_tr = [normalize(X_tr',m,istd)' ones(size(X_tr,1),1)];
         X_val = [normalize(X_val',m,istd)' ones(size(X_val,1),1)];
         

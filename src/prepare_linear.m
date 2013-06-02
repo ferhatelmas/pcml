@@ -1,7 +1,7 @@
 importfile('../data/norb_5class.mat');
 
 X = [train_left_s; train_right_s];
-[m, istd] = find_par(X);
+[m, istd] = find_parameters(X);
 
 X_test = normalize([test_left_s; test_right_s], m, istd);
 
