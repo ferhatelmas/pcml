@@ -1,5 +1,5 @@
-function lr_plotter(v, tr_err_avg, val_err_avg, std_devs, v_opt, v_opt_i)
-%LR_PLOTTER(v, tr_err_avg, val_err_avg, std_devs)
+function linear_plotter(v, tr_err_avg, val_err_avg, std_devs, v_opt, v_opt_i)
+%LINEAR_PLOTTER(v, tr_err_avg, val_err_avg, std_devs)
 % plots linear regression validation errors, mean & standard deviation
 % v: vector of Tikhonov regularizers
 % val_err_avg: vector of cross validation error averages for parameters v
@@ -8,7 +8,7 @@ function lr_plotter(v, tr_err_avg, val_err_avg, std_devs, v_opt, v_opt_i)
 % v_opt: optimum v selected by cross-validation
 
 close all
-figure(1);
+h = figure(1);
 semilogx(v,tr_err_avg,'-r');
 hold on
 semilogx(v,val_err_avg,'-g');
@@ -20,3 +20,6 @@ legend('Training','Validation','Standard Deviation','v*');
 title('Training, Validation and Std for Cross Validation');
 xlabel('v');
 ylabel('Error');
+
+% set font size to larger one
+set(findall(h, 'type', 'text'), 'fontSize', 18)

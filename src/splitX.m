@@ -12,4 +12,4 @@ dataset(:, val_columns) = [];
 train_data = dataset;
 
 % calculate mean and std_deviation of dataset
-[m istd] = find_par(train_data);
+[m, istd] = find_par(train_data);

@@ -58,7 +58,7 @@ end
 v_opt = v(ind);
 
 % visualize results
-lr_plotter(v, tr_err_avg, val_err_avg, std_devs, v_opt, ind)
+linear_plotter(v, tr_err_avg, val_err_avg, std_devs, v_opt, ind)
 end
 
 function [tr, val] = divide(m, i, c)

@@ -1,4 +1,4 @@
-function [m istd] = find_par(data)
+function [m, istd] = find_par(data)
 %FIND_VAR(data)
 % Find mean and deviation
 % calculate mean and std_deviation of dataset

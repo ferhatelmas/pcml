@@ -1,4 +1,4 @@
-function [tr_err, val_err, zero_one_error, logistic_error_test, zero_one_error_test min_i max_i] = mlp_binary(h1, h2, nu, mu, batch_size)
+function [tr_err, val_err, zero_one_error, logistic_error_test, zero_one_error_test, min_i, max_i] = mlp_binary(h1, h2, nu, mu, batch_size)
 %MLP_BINARY(h1, h2, nu, mu, batch_size)
 % h1: Number of neurons in the first layer
 % h2: Number of neurons in the second layer
