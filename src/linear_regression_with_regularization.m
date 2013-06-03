@@ -1,5 +1,5 @@
-function test_err = linear_reg(X, T, X_test, T_test)
-%LINEAR_REG(X, T, X_test, T_test)
+function test_err = linear_regression_with_regularization(X, T, X_test, T_test)
+%LINEAR_REGRESSION_WITH_REGULARIZATION(X, T, X_test, T_test)
 % linear regression with Tikhonov regularizer
 % CALL PREPARE_LINEAR BEFORE RUNNING
 
@@ -27,4 +27,4 @@ B = X'*T_T;
 W = A\B;
 
 % calculate test error for optimum W
-test_err = regerr(X_test, W, T_T_test, v_opt);
+test_err = regularized_error(X_test, W, T_T_test, v_opt);

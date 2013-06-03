@@ -1,5 +1,5 @@
 function v_opt = cross_validation(X, T_T, v, M)
-%cross_validation(X, T_T, v, M)
+%CROSS_VALIDATION(X, T_T, v, M)
 % M-fold cross validation to pick v
 % X: concatenated input matrix
 % T_T: 1-M encoded target matrix
@@ -30,7 +30,7 @@ for j=1:tn % runs for regularization parameters
         [T_tr, T_val] = divide(T_T, i, c);
         
         % normalize folds
-        [m,istd] = find_par(X_tr');
+        [m,istd] = find_parameters(X_tr');
         X_tr = [normalize(X_tr',m,istd)' ones(size(X_tr,1),1)];
         X_val = [normalize(X_val',m,istd)' ones(size(X_val,1),1)];
         
@@ -41,8 +41,8 @@ for j=1:tn % runs for regularization parameters
 
         % test performance on validation fold (variance)
         % accumulate training and validation for average
-        tr_err = sqrerr(T_tr',(X_tr*W)');
-        val_err = sqrerr(T_val',(X_val*W)');
+        tr_err = squared_error(T_tr',(X_tr*W)');
+        val_err = squared_error(T_val',(X_val*W)');
         tr_err_avg(j) = tr_err_avg(j) + tr_err;
         val_err_avg(j) = val_err_avg(j) + val_err;
         val_errs(fold) = val_err;
@@ -58,7 +58,7 @@ end
 v_opt = v(ind);
 
 % visualize results
-lr_plotter(v, tr_err_avg, val_err_avg, std_devs, v_opt, ind)
+plotter_linear(v, tr_err_avg, val_err_avg, std_devs, v_opt, ind)
 end
 
 function [tr, val] = divide(m, i, c)
