@@ -1,4 +1,4 @@
-function test_err = linear_regression_with_regularization(X, T, X_test, T_test)
+function [test_err, zero_one_err, confused] = linear_regression_with_regularization(X, T, X_test, T_test)
 %LINEAR_REGRESSION_WITH_REGULARIZATION(X, T, X_test, T_test)
 % linear regression with Tikhonov regularizer
 % CALL PREPARE_LINEAR BEFORE RUNNING
@@ -28,3 +28,7 @@ W = A\B;
 
 % calculate test error for optimum W
 test_err = regularized_error(X_test, W, T_T_test, v_opt);
+% zero-one error
+[~,c] = max(a_3,[],1); % find index of maximum among each sample output
+zero_one_err = mean(c-1 ~= T_test);
+confused = confusionmat(T_test,c-1,'order',[0,1,2,3,4]); % confusion matrix

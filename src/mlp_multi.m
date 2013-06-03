@@ -1,4 +1,4 @@
-function [tr_err, val_err, zero_one_error, sq_error_test, confused] = mlp_multi(h1, h2, nu, mu, batch_size)
+function [tr_err, val_err, zero_one_error, sq_error_test, zero_one_err_test confused] = mlp_multi(h1, h2, nu, mu, batch_size)
 %MLP_MULTI(h1, h2, nu, mu, batch_size)
 % h1: Number of neurons in the first layer
 % h2: Number of neurons in the second layer
@@ -30,7 +30,10 @@ T_test = evalin('base', 'T_test');
    
 % Calculates squared error for the predicted class labels                                        
 sq_error_test = sqrerr(encoder(T_test)', a_3);
+
+% zero-one error
 [~,c] = max(a_3,[],1); % find index of maximum among each sample output
+zero_one_err_test = mean(c-1 ~= T_test);
 confused = confusionmat(T_test,c-1,'order',[0,1,2,3,4]); % confusion matrix
 
 end

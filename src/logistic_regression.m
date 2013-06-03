@@ -1,4 +1,4 @@
-function [tr_err, val_err, zero_one_err, test_err] = logistic_regression(X_L, X_R, T, X_L_val, X_R_val, T_val, X_L_test, X_R_test, T_test, nu, mu)
+function [tr_err, val_err, zero_one_err, test_err, zero_one_err_test, confused] = logistic_regression(X_L, X_R, T, X_L_val, X_R_val, T_val, X_L_test, X_R_test, T_test, nu, mu)
 %LOGISTIC_REGRESSION(X_L, X_R, T, X_L_val, X_R_val, T_val, X_L_test, X_R_test, T_test)
 % linear classifier with logistic error and gradient descent
 % CALL PREPARE_MULTI BEFORE RUNNING
@@ -48,3 +48,8 @@ while(sum(early_stop > 1e-6*ones(1,2)) > 0)
 end
 
 test_err = logistic_error_multi(X_test,W,T_T_test); % test error with optimized W
+
+% zero-one error
+[~,c] = max(a_3,[],1); % find index of maximum among each sample output
+zero_one_err_test = mean(c-1 ~= T_test);
+confused = confusionmat(T_test,c-1,'order',[0,1,2,3,4]); % confusion matrix

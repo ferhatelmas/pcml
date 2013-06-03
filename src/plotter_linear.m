@@ -20,6 +20,3 @@ legend('Training','Validation','Standard Deviation','v*');
 title('Training, Validation and Std for Cross Validation');
 xlabel('v');
 ylabel('Error');
-
-% set font size to larger one
-set(findall(h, 'type', 'text'), 'fontSize', 18)
