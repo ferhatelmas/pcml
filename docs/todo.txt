@@ -1,0 +1,26 @@
+* Cross Validation
+  + Bias vs Variance trade-off
+  + Validation error minimum is picked
+    - Prevention of overfit
+    - Extra error in test error
+* Binary MLP
+  + Convergence speed
+    - higher h1 ~ slow
+    - higher h2 ~ faster
+    - equal ~ fastest
+  + Overfit isn't seen
+  + Improve early stopping explanation 
+  + Not improving validation error means overfit at overall
+  + Convergence speed
+    - Learning rate (higher is better, highest doesn't converge)
+    - Momentum (higher is better)
+  + Initialization
+    - comment on similarity of training 1 to wrong normalization 
+    - gaussian with different variance
+* Multi MLP
+  + Increase hidden units / more information 
+  + Lower variance in initialization is faster to converges
+* Average of multiple runs
+* Comment on better training with large set of parameters
+* Logistic 
+  + not affected by different variances in initializations 
