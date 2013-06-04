@@ -50,6 +50,6 @@ end
 test_err = logistic_error_multi(X_test,W,T_T_test); % test error with optimized W
 
 % zero-one error
-[~,c] = max(a_3,[],1); % find index of maximum among each sample output
+[~,c] = max(W*X_test,[],1); % find index of maximum among each sample output
 zero_one_err_test = mean(c-1 ~= T_test);
 confused = confusionmat(T_test,c-1,'order',[0,1,2,3,4]); % confusion matrix
