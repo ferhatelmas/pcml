@@ -6,7 +6,7 @@ function plotter_multi(tr_err1, tr_err2, tr_err3, val_err1, val_err2, val_err3, 
 % zero_one_err_i: vector of zero-one errors for each epoch for trial i
 
 close all
-h = figure(1);
+figure(1)
 semilogy(tr_err1,'-r');
 hold on
 semilogy(val_err1,'--r');
@@ -29,6 +29,3 @@ legend('Training 1','Validation 1','Zero-One 1','Training 2','Validation 2','Zer
 title('Training, Validation and Zero-One Errors for MLP Training');
 xlabel('Epoch #');
 ylabel('Error Value');
-
-% set font size to larger one
-set(findall(h, 'type', 'text'), 'fontSize', 18)

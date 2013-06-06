@@ -29,7 +29,7 @@ T_test = evalin('base', 'T_test');
                                             w_3, b_3);
    
 % Calculates squared error for the predicted class labels                                        
-sq_error_test = sqrerr(encoder(T_test)', a_3);
+sq_error_test = squared_error(encoder(T_test)', a_3);
 
 % zero-one error
 [~,c] = max(a_3,[],1); % find index of maximum among each sample output
